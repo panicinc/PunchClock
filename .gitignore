@@ -1,0 +1,10 @@
+xcuserdata/
+/build/
+
+/.DS_Store
+
+/Pods/
+
+PunchClock/constants.h
+/PunchClock/PunchClock_Beta.xcconfig
+/PunchClock/PunchClock_Debug.xcconfig

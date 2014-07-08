@@ -1,0 +1,24 @@
+#ifdef CONFIGURATION_Debug
+#define PCbaseURL @"http://machine.local:5000"
+#else
+#define PCbaseURL @"https://your-punchclock.herokuapp.com"
+#endif
+
+#define backendUsername @"username"
+#define backendPassword @"password"
+
+#define officeIdentifier @"com.office.location"
+#define officeBeaconIdentifier @"com.office.iBeacon"
+#define keychainID @"com.xxx.PunchClock"
+
+#define beaconUUID @"xxx"
+
+#define geoFenceLong -122.682351
+#define geoFenceLat 45.522761
+#define geoFenceRadius 30.0
+
+#define hockeyBetaIdentifier @"00000000000000000000000000000000"
+#define hockeyAuthenticationSecret @"00000000000000000000000000000000"
+
+#define zeroPushDevKey @"xxx"
+#define zeroPushProdKey @"xxx"

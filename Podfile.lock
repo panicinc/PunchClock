@@ -1,0 +1,62 @@
+PODS:
+  - ADiOSUtilities (1.0.0):
+    - ADiOSUtilities/ADFoundationAdditions
+    - ADiOSUtilities/ADHelpers
+    - ADiOSUtilities/ADUIKitAdditions
+  - ADiOSUtilities/ADFoundationAdditions (1.0.0)
+  - ADiOSUtilities/ADHelpers (1.0.0)
+  - ADiOSUtilities/ADUIKitAdditions (1.0.0)
+  - AFNetworking (2.2.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.1):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.2.1)
+  - AFNetworking/Security (2.2.1)
+  - AFNetworking/Serialization (2.2.1)
+  - AFNetworking/UIKit (2.2.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - CocoaLumberjack (1.8.1):
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.8.1)
+  - CocoaLumberjack/Extensions (1.8.1):
+    - CocoaLumberjack/Core
+  - HockeySDK (3.5.4)
+  - KeychainItemWrapper (1.2)
+  - MZAppearance (1.1.3)
+  - MZFormSheetController (2.3.4):
+    - MZAppearance (~> 1.1.3)
+  - Seriously (2.0.0)
+  - ZeroPush (1.1.0):
+    - ADiOSUtilities (~> 1.0.0)
+    - Seriously (~> 2.0.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.0)
+  - CocoaLumberjack
+  - HockeySDK
+  - KeychainItemWrapper (~> 1.2)
+  - MZFormSheetController (~> 2.3)
+  - ZeroPush
+
+SPEC CHECKSUMS:
+  ADiOSUtilities: 4b3347dc334c55d890becd65a6f94c9984fd82a6
+  AFNetworking: 8dde8c8a6597ad95dac332a593c27e541bc87371
+  CocoaLumberjack: 9d198d6e19909b3b113a38c5f06f7bb8eedd0427
+  HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
+  KeychainItemWrapper: 577e9e920185892873ded075b8ceb730bebdfd91
+  MZAppearance: c88502c0c2345120630c34e09d5ff09e2969ba30
+  MZFormSheetController: 8c453908080c338274e68908849029435d3e2736
+  Seriously: 46d22ba1ae046629e2586364bce44ee838828291
+  ZeroPush: 7e26e4abc1573cd559092ebcb2f79582abd7c41e
+
+COCOAPODS: 0.33.1
