@@ -39,7 +39,6 @@
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
-
 @end
 
 @implementation PCLocationManager
@@ -149,8 +148,9 @@
 - (void)setupManager
 {
 
-	if (!self.canTrackLocation || self.setupCompleted)
+	if (!self.canTrackLocation || self.setupCompleted) {
 		return;
+	}
 
 	self.lastExitDate = [NSDate dateWithTimeIntervalSince1970:0];
 	self.lastEntryDate = [NSDate dateWithTimeIntervalSince1970:0];
@@ -188,7 +188,8 @@
 
 #pragma mark - KVO
 
-+ (NSSet *)keyPathsForValuesAffectingLocationStatus {
++ (NSSet *)keyPathsForValuesAffectingLocationStatus
+{
 	return [NSSet setWithObjects:@"inRange", @"nearOffice", @"officeDistanceValue", nil];
 }
 
@@ -236,13 +237,16 @@
 - (BOOL)updateLocationStatusIfNeeded
 {
 	NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.lastNotificationDate];
+
 	if (interval > 60) {
 		dispatch_queue_t queue = dispatch_queue_create("com.panic.punchclock.updateLocation", NULL);
 		dispatch_async(queue, ^{
 			[self updateLocationStatus];
 		});
+
 		return YES;
 	} else {
+
 		return NO;
 	}
 }
@@ -320,6 +324,7 @@
 }
 
 #pragma mark - App State
+
 - (void)enterBackground
 {
 	DDLogDebug(@"Entering Background");
@@ -348,6 +353,7 @@
 }
 
 #pragma mark - GeoFencing
+
 - (void)enableGeoFence
 {
 	if (!self.geoFenceEnabled && self.canTrackLocation && self.setupCompleted) {
@@ -455,7 +461,8 @@
 	[self didChangeValueForKey:@"inRange"];
 }
 
-- (BOOL)inRange {
+- (BOOL)inRange
+{
 	return _inRange;
 }
 
@@ -481,7 +488,7 @@
 		formatter.units = MKDistanceFormatterUnitsImperial;
 		self.officeDistance = [formatter stringFromDistance:self.officeDistanceValue];
 
-		DDLogVerbose(@"Distance from office %f",self.officeDistanceValue);
+		DDLogVerbose(@"Distance from office %f", self.officeDistanceValue);
 
 		if ([self.officeRegion containsCoordinate:location.coordinate]) {
 			self.nearOffice = YES;

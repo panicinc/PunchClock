@@ -23,7 +23,7 @@
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.714f green:0.729f blue:0.714f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_DEBUG];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.624f green:0.635f blue:0.337f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_INFO];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.839f green:0.631f blue:0.298f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_WARN];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.925 green:0.000 blue:0.000 alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_ERROR];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.925f green:0.000f blue:0.000f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_ERROR];
 
 	PCFileFunctionLevelFormatter *formatter = [PCFileFunctionLevelFormatter new];
 	[[DDTTYLogger sharedInstance] setLogFormatter:formatter];
@@ -67,6 +67,7 @@
 
 	if (launchOptions != nil) {
 		NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+
 		if (dictionary != nil) {
 			DDLogInfo(@"Launched from push notification: %@", dictionary);
 		}
@@ -74,7 +75,6 @@
 
 	return YES;
 }
-
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -139,8 +139,6 @@
 
 }
 
-
-
 #pragma mark - Notifications
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)tokenData
@@ -159,8 +157,8 @@
 
 	//if the notification doesn't say there is content available just return
     NSDictionary *aps = [userInfo objectForKey:@"aps"];
-    if(![[aps objectForKey:@"content-available"] intValue])
-    {
+
+    if (![[aps objectForKey:@"content-available"] intValue]) {
         DDLogDebug(@"Updating Status List");
 
 		NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
@@ -212,7 +210,6 @@
 	[defaults setObject:@"" forKey:@"push_id"];
 
 }
-
 
 #pragma mark - basic stuff
 

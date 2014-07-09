@@ -9,8 +9,8 @@
 #import "PCNameViewController.h"
 @import QuartzCore;
 
-
 @interface PCNameViewController()
+
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 
 @end
@@ -26,9 +26,12 @@
 }
 
 #pragma mark - UITextFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
-    return YES;
+
+	return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField

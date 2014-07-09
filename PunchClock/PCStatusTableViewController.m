@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *messageButton;
 @property (strong, nonatomic) IBOutlet UIView *topToolbar;
 @property (strong, nonatomic) IBOutlet UILabel *toolbarTitle;
+
 @end
 
 @implementation PCStatusTableViewController
@@ -70,7 +71,8 @@
 
 }
 
-- (IBAction)watchButtonTapped:(UIButton *)sender {
+- (IBAction)watchButtonTapped:(UIButton *)sender
+{
 	// Get the name from the label in the same row
 	CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.tableView];
 	NSIndexPath *hitIndex = [self.tableView indexPathForRowAtPoint:hitPoint];

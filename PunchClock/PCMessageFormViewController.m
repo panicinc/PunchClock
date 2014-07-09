@@ -18,11 +18,13 @@
 
 @implementation PCMessageFormViewController
 
-- (IBAction)sendButtonTapped:(id)sender {
+- (IBAction)sendButtonTapped:(id)sender
+{
 	[self textFieldShouldReturn:self.messageTextField];
 }
 
-- (IBAction)cancelButtonTapped:(id)sender {
+- (IBAction)cancelButtonTapped:(id)sender
+{
 	[self mz_dismissFormSheetControllerAnimated:YES completionHandler:nil];
 }
 
@@ -71,8 +73,8 @@
     [operation start];
 
 	return YES;
-}
 
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -80,4 +82,5 @@
 
 	[self.messageTextField becomeFirstResponder];
 }
+
 @end

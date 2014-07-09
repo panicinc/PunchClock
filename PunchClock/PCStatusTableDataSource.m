@@ -42,8 +42,9 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 - (void)fetchPeople
 {
-	if (self.fetchingPeople)
+	if (self.fetchingPeople) {
 		return;
+	}
 
 	DDLogDebug(@"Polling for statuses");
 
@@ -89,6 +90,7 @@ static NSString *cellIdentifier = @"StatusTableCell";
 }
 
 #pragma mark - UITableViewDelegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	if (!self.allPeople) {

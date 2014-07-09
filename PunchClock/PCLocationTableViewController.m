@@ -30,7 +30,8 @@
 
 @implementation PCLocationTableViewController
 
-- (IBAction)refreshLocation:(id)sender {
+- (IBAction)refreshLocation:(id)sender
+{
 
 	[self.locationManager updateLocationStatus];
 	[[self tableView] reloadData];
