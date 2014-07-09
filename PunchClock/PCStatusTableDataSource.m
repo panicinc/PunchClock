@@ -26,38 +26,38 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 - (NSArray *)allPeople
 {
-	if (self.fetchedPeople == nil) {
-		[self fetchPeople];
+    if (self.fetchedPeople == nil) {
+        [self fetchPeople];
 
-		return @[];
-	} else {
-		return [self.fetchedPeople copy];
-	}
+        return @[];
+    } else {
+        return [self.fetchedPeople copy];
+    }
 }
 
 - (void)refreshData
 {
-	[self fetchPeople];
+    [self fetchPeople];
 }
 
 - (void)fetchPeople
 {
-	if (self.fetchingPeople)
-		return;
+    if (self.fetchingPeople)
+        return;
 
-	DDLogDebug(@"Polling for statuses");
+    DDLogDebug(@"Polling for statuses");
 
-	self.fetchingPeople = YES;
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *username = [defaults stringForKey:@"username"];
+    self.fetchingPeople = YES;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults stringForKey:@"username"];
 
-	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
-	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
 
-	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET"
-																	  URLString:[NSString stringWithFormat:@"%@/status/list", PCbaseURL]
-																	 parameters:@{@"name": username}
-																		  error:nil];
+    NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET"
+                                                                      URLString:[NSString stringWithFormat:@"%@/status/list", PCbaseURL]
+                                                                     parameters:@{@"name": username}
+                                                                          error:nil];
 
 
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -67,99 +67,100 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
         self.fetchedPeople = (NSArray *)responseObject;
 
-		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusesUpdated" object:self.numberOfPeopleIn]];
-		self.fetchingPeople = NO;
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusesUpdated" object:self.numberOfPeopleIn]];
+        self.fetchingPeople = NO;
 
     } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
-		DDLogError(@"Fetching Statuses failed: %@", error.localizedDescription);
-		self.fetchingPeople = NO;
+        DDLogError(@"Fetching Statuses failed: %@", error.localizedDescription);
+        self.fetchingPeople = NO;
 
     }];
 
     [operation start];
-
 }
 
 - (NSNumber *)numberOfPeopleIn
 {
-	NSPredicate *predicateString = [NSPredicate predicateWithFormat:@"%K == %@", @"status", @"In"];
-	NSNumber *c = @([[self.fetchedPeople filteredArrayUsingPredicate:predicateString] count]);
+    NSPredicate *predicateString = [NSPredicate predicateWithFormat:@"%K == %@", @"status", @"In"];
+    NSNumber *c = @([[self.fetchedPeople filteredArrayUsingPredicate:predicateString] count]);
 
-	return c;
+    return c;
 }
 
+
 #pragma mark - UITableViewDelegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if (!self.allPeople) {
-		return 0;
-	}
+    if (!self.allPeople) {
+        return 0;
+    }
 
-	return self.allPeople.count;
+    return self.allPeople.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-	}
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+    }
 
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *push_id = [defaults stringForKey:@"push_id"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *push_id = [defaults stringForKey:@"push_id"];
 
-	if (self.allPeople.count > 0) {
-		NSDictionary *person = self.allPeople[indexPath.row];
+    if (self.allPeople.count > 0) {
+        NSDictionary *person = self.allPeople[indexPath.row];
 
-		// Image
-		NSString *username = [person objectForKey:@"name"];
-		NSString *imageURL = [NSString stringWithFormat:@"%@/image/%@", PCbaseURL, username];
+        // Image
+        NSString *username = [person objectForKey:@"name"];
+        NSString *imageURL = [NSString stringWithFormat:@"%@/image/%@", PCbaseURL, username];
 
-		AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-		[serializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
-		NSMutableURLRequest *URLRequest = [serializer requestWithMethod:@"GET" URLString:imageURL parameters:nil error:nil];
-
-
-		UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
-		[imageView setImageWithURLRequest:URLRequest
-						 placeholderImage:[UIImage imageNamed:@"unknown"]
-								  success:nil
-								  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-									  DDLogError(@"image fetch failed: %@\n%@", response, error);
-
-								  }];
-
-		// Name label
-		NSString *personLabel = [username capitalizedString];
-		[(UILabel *)[cell viewWithTag:1] setText:personLabel];
-
-		// Status
-		PCStatusLabel *statusLabel = (PCStatusLabel *)[cell viewWithTag:2];
-		statusLabel.text = [person objectForKey:@"status"];
-
-		// Notification Bell
-		UIButton *bell = (UIButton *)[cell viewWithTag:4];
-		NSNumber *watched_by_value = (NSNumber *)[person objectForKey:@"watched_by_requestor"];
-		bell.selected = [watched_by_value boolValue];
-
-		if ([push_id isEqualToString:@""]) {
-			bell.hidden = YES;
-		}
-
-		UIButton *eye = (UIButton *)[cell viewWithTag:5];
-		NSNumber *watches_value = (NSNumber *)[person objectForKey:@"watches_requestor"];
-		eye.hidden = ![watches_value boolValue];
+        AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
+        [serializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
+        NSMutableURLRequest *URLRequest = [serializer requestWithMethod:@"GET" URLString:imageURL parameters:nil error:nil];
 
 
-	}
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
+        [imageView setImageWithURLRequest:URLRequest
+                         placeholderImage:[UIImage imageNamed:@"unknown"]
+                                  success:nil
+                                  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                      DDLogError(@"image fetch failed: %@\n%@", response, error);
 
-	return cell;
+                                  }];
+
+        // Name label
+        NSString *personLabel = [username capitalizedString];
+        [(UILabel *)[cell viewWithTag:1] setText:personLabel];
+
+        // Status
+        PCStatusLabel *statusLabel = (PCStatusLabel *)[cell viewWithTag:2];
+        statusLabel.text = [person objectForKey:@"status"];
+
+        // Notification Bell
+        UIButton *bell = (UIButton *)[cell viewWithTag:4];
+        NSNumber *watched_by_value = (NSNumber *)[person objectForKey:@"watched_by_requestor"];
+        bell.selected = [watched_by_value boolValue];
+
+        if ([push_id isEqualToString:@""]) {
+            bell.hidden = YES;
+        }
+
+        UIButton *eye = (UIButton *)[cell viewWithTag:5];
+        NSNumber *watches_value = (NSNumber *)[person objectForKey:@"watches_requestor"];
+        eye.hidden = ![watches_value boolValue];
+
+
+    }
+
+    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return NO;
+    return NO;
 }
 
 @end

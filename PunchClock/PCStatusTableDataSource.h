@@ -12,4 +12,5 @@
 
 - (void)refreshData;
 @property (nonatomic, strong, readonly) NSNumber *numberOfPeopleIn;
+
 @end
