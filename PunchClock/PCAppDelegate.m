@@ -15,130 +15,128 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Logging
-	[DDLog addLogger:[DDTTYLogger sharedInstance]];
-	[DDLog addLogger:[DDASLLogger sharedInstance]];
+    // Logging
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
 
-	[[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.714f green:0.729f blue:0.714f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_DEBUG];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.624f green:0.635f blue:0.337f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_INFO];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.839f green:0.631f blue:0.298f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_WARN];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.925 green:0.000 blue:0.000 alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_ERROR];
 
-	PCFileFunctionLevelFormatter *formatter = [PCFileFunctionLevelFormatter new];
-	[[DDTTYLogger sharedInstance] setLogFormatter:formatter];
+    PCFileFunctionLevelFormatter *formatter = [PCFileFunctionLevelFormatter new];
+    [[DDTTYLogger sharedInstance] setLogFormatter:formatter];
 
-	// Hockey
-	[[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:hockeyBetaIdentifier
-														 liveIdentifier:@"00000000000000000000000000000000"
-															   delegate:self];
+    // Hockey
+    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:hockeyBetaIdentifier
+                                                         liveIdentifier:@"00000000000000000000000000000000"
+                                                               delegate:self];
 
-	[BITHockeyManager sharedHockeyManager].crashManager.showAlwaysButton = YES;
+    [BITHockeyManager sharedHockeyManager].crashManager.showAlwaysButton = YES;
 
 #ifdef CONFIGURATION_Debug
-	[BITHockeyManager sharedHockeyManager].disableCrashManager = YES;
-	[BITHockeyManager sharedHockeyManager].disableUpdateManager = YES;
+    [BITHockeyManager sharedHockeyManager].disableCrashManager = YES;
+    [BITHockeyManager sharedHockeyManager].disableUpdateManager = YES;
 #else
-	[[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:hockeyAuthenticationSecret];
-	[[BITHockeyManager sharedHockeyManager].authenticator setIdentificationType:BITAuthenticatorIdentificationTypeHockeyAppEmail];
+    [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:hockeyAuthenticationSecret];
+    [[BITHockeyManager sharedHockeyManager].authenticator setIdentificationType:BITAuthenticatorIdentificationTypeHockeyAppEmail];
 #endif
 
-	[[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager] startManager];
 
 #ifdef CONFIGURATION_Beta
-	[[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 #endif
 
-	// Default Settings
-	NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:1];
-	[settings setObject:@"" forKey:@"username"];
-	[settings setObject:@"" forKey:@"push_id"];
+    // Default Settings
+    NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:1];
+    [settings setObject:@"" forKey:@"username"];
+    [settings setObject:@"" forKey:@"push_id"];
 
-	[[NSUserDefaults standardUserDefaults] registerDefaults:settings];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:settings];
 
-	[[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"username" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial) context:NULL];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"username" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial) context:NULL];
 
-	self.locationManager = [PCLocationManager sharedLocationManager];
+    self.locationManager = [PCLocationManager sharedLocationManager];
 
-	[application setStatusBarHidden:NO];
-	[application setStatusBarStyle:UIStatusBarStyleLightContent];
+    [application setStatusBarHidden:NO];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
-	[application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-	if (launchOptions != nil) {
-		NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-		if (dictionary != nil) {
-			DDLogInfo(@"Launched from push notification: %@", dictionary);
-		}
-	}
+    if (launchOptions != nil) {
+        NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dictionary != nil) {
+            DDLogInfo(@"Launched from push notification: %@", dictionary);
+        }
+    }
 
-	return YES;
+    return YES;
 }
-
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if (object == [NSUserDefaults standardUserDefaults]) {
+    if (object == [NSUserDefaults standardUserDefaults]) {
 
-		if ([keyPath isEqualToString:@"username"]) {
-			[self syncPreferencesWithKeychain];
-		}
+        if ([keyPath isEqualToString:@"username"]) {
+            [self syncPreferencesWithKeychain];
+        }
 
-	} else {
-		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-	}
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 - (void)syncPreferencesWithKeychain
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *username = [defaults stringForKey:@"username"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults stringForKey:@"username"];
 
-	NSString *serviceName = keychainID;
+    NSString *serviceName = keychainID;
 
-	KeychainItemWrapper *personKeychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"Username" accessGroup:nil];
+    KeychainItemWrapper *personKeychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"Username" accessGroup:nil];
 
-	[personKeychainItem setObject:@"pcUsername" forKey:(__bridge id) kSecAttrAccount];
-	[personKeychainItem setObject:serviceName forKey:(__bridge id) kSecAttrService];
-	NSString *kcUsername = [personKeychainItem objectForKey:((__bridge id) kSecValueData)];
+    [personKeychainItem setObject:@"pcUsername" forKey:(__bridge id) kSecAttrAccount];
+    [personKeychainItem setObject:serviceName forKey:(__bridge id) kSecAttrService];
+    NSString *kcUsername = [personKeychainItem objectForKey:((__bridge id) kSecValueData)];
 
-	if (![username isEqualToString:@""] && ![username isEqualToString:kcUsername]) {
-		// If it's in the Prefs and it's different from what's in the keychain
-		DDLogDebug(@"Pushing username to keychain");
-		[personKeychainItem setObject:username forKey:(__bridge id) kSecValueData];
+    if (![username isEqualToString:@""] && ![username isEqualToString:kcUsername]) {
+        // If it's in the Prefs and it's different from what's in the keychain
+        DDLogDebug(@"Pushing username to keychain");
+        [personKeychainItem setObject:username forKey:(__bridge id) kSecValueData];
 
-	} else if ([username isEqualToString:@""] && kcUsername) {
-		// If its in the keychain but not in the prefs
-		DDLogDebug(@"Username missing from prefs, fetching from Keychain: %@", kcUsername);
-		[defaults setObject:kcUsername forKey:@"username"];
-	}
+    } else if ([username isEqualToString:@""] && kcUsername) {
+        // If its in the keychain but not in the prefs
+        DDLogDebug(@"Username missing from prefs, fetching from Keychain: %@", kcUsername);
+        [defaults setObject:kcUsername forKey:@"username"];
+    }
 
-	[defaults synchronize];
-	
+    [defaults synchronize];
 }
 
-#pragma mark - background fetch
+
+#pragma mark - Background fetch
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-	DDLogDebug(@"I'm running in the background!");
+    DDLogDebug(@"I'm running in the background!");
 
-	BOOL updated = [self.locationManager updateLocationStatusIfNeeded];
-	UIBackgroundFetchResult result;
+    BOOL updated = [self.locationManager updateLocationStatusIfNeeded];
+    UIBackgroundFetchResult result;
 
-	if (updated) {
-		result = UIBackgroundFetchResultNewData;
-	} else {
-		result = UIBackgroundFetchResultNoData;
-	}
+    if (updated) {
+        result = UIBackgroundFetchResultNewData;
+    } else {
+        result = UIBackgroundFetchResultNoData;
+    }
 
-	dispatch_group_notify(self.locationManager.dispatchGroup, dispatch_get_main_queue(), ^{
-		DDLogDebug(@"Background stuff finished. Result is %ld", (long) result);
-		completionHandler(result);
+    dispatch_group_notify(self.locationManager.dispatchGroup, dispatch_get_main_queue(), ^{
+        DDLogDebug(@"Background stuff finished. Result is %ld", (long) result);
+        completionHandler(result);
     });
 
 }
-
 
 
 #pragma mark - Notifications
@@ -147,128 +145,126 @@
 {
     [[ZeroPush shared] registerDeviceToken:tokenData];
     NSString *tokenString = [ZeroPush deviceTokenFromData:tokenData];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:tokenString forKey:@"push_id"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:tokenString forKey:@"push_id"];
 
     DDLogDebug(@"Push Token is %@", tokenString);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-	DDLogDebug(@"Push notification: %@", userInfo);
+    DDLogDebug(@"Push notification: %@", userInfo);
 
-	//if the notification doesn't say there is content available just return
+    //if the notification doesn't say there is content available just return
     NSDictionary *aps = [userInfo objectForKey:@"aps"];
     if(![[aps objectForKey:@"content-available"] intValue])
     {
         DDLogDebug(@"Updating Status List");
 
-		NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
-		[[NSNotificationCenter defaultCenter] postNotification:n];
+        NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:n];
 
         completionHandler(UIBackgroundFetchResultNoData);
         return;
     } else {
 
-		dispatch_group_enter(self.locationManager.dispatchGroup);
+        dispatch_group_enter(self.locationManager.dispatchGroup);
 
-		BOOL updated = [self.locationManager updateLocationStatusIfNeeded];
-		UIBackgroundFetchResult result;
+        BOOL updated = [self.locationManager updateLocationStatusIfNeeded];
+        UIBackgroundFetchResult result;
 
-		if (updated) {
-			result = UIBackgroundFetchResultNewData;
-		} else {
-			result = UIBackgroundFetchResultNoData;
-		}
+        if (updated) {
+            result = UIBackgroundFetchResultNewData;
+        } else {
+            result = UIBackgroundFetchResultNoData;
+        }
 
-		dispatch_group_leave(self.locationManager.dispatchGroup);
+        dispatch_group_leave(self.locationManager.dispatchGroup);
 
-		dispatch_group_notify(self.locationManager.dispatchGroup, dispatch_get_main_queue(), ^{
-			DDLogDebug(@"Background stuff finished. Result is %ld", (long) result);
-			completionHandler(result);
-		});
-
-	}
+        dispatch_group_notify(self.locationManager.dispatchGroup, dispatch_get_main_queue(), ^{
+            DDLogDebug(@"Background stuff finished. Result is %ld", (long) result);
+            completionHandler(result);
+        });
+    }
 
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-	DDLogVerbose(@"<---");
+    DDLogVerbose(@"<---");
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-	// If the application is in the foreground, we will notify the user of the region's state via an alert.
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertBody message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	[alert show];
+    // If the application is in the foreground, we will notify the user of the region's state via an alert.
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertBody message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-	DDLogError(@"Registration failed: %@", error.localizedDescription);
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:@"" forKey:@"push_id"];
+    DDLogError(@"Registration failed: %@", error.localizedDescription);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"" forKey:@"push_id"];
 
 }
 
 
-#pragma mark - basic stuff
+#pragma mark - Basic stuff
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-	// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-	[self.locationManager enterBackground];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	DDLogVerbose(@"<---");
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [self.locationManager enterBackground];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    DDLogVerbose(@"<---");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-	DDLogVerbose(@"<---");
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    DDLogVerbose(@"<---");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-	// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-	DDLogVerbose(@"<---");
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    DDLogVerbose(@"<---");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-	// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
-	// Called when the control center is dismissed
-	[self.locationManager enterForeground];
+    // Called when the control center is dismissed
+    [self.locationManager enterForeground];
 
 #ifdef CONFIGURATION_Debug
-	[ZeroPush engageWithAPIKey:zeroPushDevKey delegate:self];
+    [ZeroPush engageWithAPIKey:zeroPushDevKey delegate:self];
 #else
-	[ZeroPush engageWithAPIKey:zeroPushProdKey delegate:self];
+    [ZeroPush engageWithAPIKey:zeroPushProdKey delegate:self];
 #endif
 
     [[ZeroPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |
                                                            UIRemoteNotificationTypeBadge |
                                                            UIRemoteNotificationTypeSound)];
 
+    if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
+        DDLogError(@"Notifications disabled");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:@"" forKey:@"push_id"];
+    }
 
-	if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
-		DDLogError(@"Notifications disabled");
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setObject:@"" forKey:@"push_id"];
-	}
-
-	DDLogVerbose(@"<---");
+    DDLogVerbose(@"<---");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-	DDLogVerbose(@"<---");
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    DDLogVerbose(@"<---");
 }
 
 @end

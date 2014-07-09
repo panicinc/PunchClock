@@ -12,7 +12,7 @@
 
 int main(int argc, char * argv[])
 {
-	@autoreleasepool {
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([PCAppDelegate class]));
-	}
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([PCAppDelegate class]));
+    }
 }
