@@ -9,7 +9,6 @@
 #import "PCNameViewController.h"
 @import QuartzCore;
 
-
 @interface PCNameViewController()
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 
@@ -50,7 +49,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [self mz_dismissFormSheetControllerAnimated:YES completionHandler:nil];
-
     }
 }
 

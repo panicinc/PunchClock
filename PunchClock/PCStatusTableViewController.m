@@ -151,7 +151,6 @@
     [[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
 
-
     [self.topToolbar addBottomBorderWithHeight:0.3f andColor:[UIColor colorWithRed:0.325f green:0.255f blue:0.318f alpha:1.000]];
 }
 

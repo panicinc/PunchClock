@@ -22,9 +22,7 @@
         } else if (vc == [self.viewControllers objectAtIndex:1]) {
             vc.tabBarItem.selectedImage = [UIImage imageNamed:@"options-on"];
             vc.tabBarItem.image = [[UIImage imageNamed:@"options"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
         }
-
     }
 
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:0.207f green:0.137f blue:0.202f alpha:1.000]];

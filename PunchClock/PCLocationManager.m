@@ -383,7 +383,6 @@
 
     } else {
         DDLogInfo(@"Not Near Office");
-
     }
 
     _nearOffice = near;
@@ -493,7 +492,6 @@
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-
     self.bluetoothEnabled = YES;
 
     if (beacons.count == 0) {
