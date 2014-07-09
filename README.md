@@ -13,8 +13,8 @@ Building
 In order to build PunchClock you'll need to do a few things:
 
 - `$ cp PunchClock/constants.h.sample PunchClock/constants.h`
-- `$ cp PunchClockPunchClock_Beta.xcconfig.sample PunchClockPunchClock_Beta.xcconfig`
-- `$ cp PunchClockPunchClock_Debug.xcconfig.sample PunchClockPunchClock_Debug.xcconfig`
+- `$ cp PunchClock/PunchClock_Beta.xcconfig.sample PunchClock/PunchClock_Beta.xcconfig`
+- `$ cp PunchClock/PunchClock_Debug.xcconfig.sample PunchClock/PunchClock_Debug.xcconfig`
 - `$ pod install`
 
 The `constants.h` file will need to be customized for your environment. It's meant to allow you to run PunchClock against a local copy of the server during development and a production server after release. If you don't plan to use the Hockey or push notifications you can set those things to nil.
