@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Panic Inc. All rights reserved.
 //
 
+#import "PCBackend.h"
 #import "PCLocationManager.h"
 @import CoreLocation;
 @import MapKit;
-#import <AFNetworking/AFNetworking.h>
 
 @interface PCLocationManager () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -273,55 +273,35 @@
 		return;
 	}
 
-	DDLogInfo(@"Sending update for %@:%@ in background:%i.", username, status, isInBackground);
-
-	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
-	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
-
 	NSNumber *beacon_minor = beacon.minor;
 
 	if (!beacon_minor) {
 		beacon_minor = @0;
 	}
 
-	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:[NSString stringWithFormat:@"%@/status/update", PCbaseURL]
-																	 parameters:@{@"status": status,
-																				  @"name": username,
-																				  @"push_id": push_id,
-																				  @"beacon_minor": beacon_minor}
-																		  error:nil];
-	request.timeoutInterval = 5;
+	DDLogInfo(@"Sending update for %@:%@ in background:%i.", username, status, isInBackground);
 
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+	[[PCBackend sharedBackend] updateWithStatus:status
+										   name:username
+										push_id:push_id
+								   beacon_minor:beacon_minor
+										success:^(id responseObject) {
 
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
+											DDLogDebug(@"Response: %@", responseObject);
+											NSNumber *status_changed = responseObject[@"status_changed"];
 
-		DDLogDebug(@"Response: %@", responseObject);
-		NSNumber *status_changed = responseObject[@"status_changed"];
+											if (!isInBackground && status_changed.boolValue) {
+												NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
+												[[NSNotificationCenter defaultCenter] postNotification:n];
+											}
+											self.lastNotificationDate = [NSDate date];
+											
+											dispatch_group_leave(self.dispatchGroup);
 
-		if (!isInBackground && status_changed.boolValue) {
-			NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
-			[[NSNotificationCenter defaultCenter] postNotification:n];
-		}
-		self.lastNotificationDate = [NSDate date];
-
-		dispatch_group_leave(self.dispatchGroup);
-
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
-		DDLogError(@"Status update failed: %@", error.localizedDescription);
-		dispatch_group_leave(self.dispatchGroup);
-
-    }];
-
-	[operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
-		// Handle iOS shutting you down (possibly make a note of where you
-		// stopped so you can resume later)
-	}];
-
-    [operation start];
-	
+										} failure:^(NSError *error) {
+											DDLogError(@"Status update failed: %@", error.localizedDescription);
+											dispatch_group_leave(self.dispatchGroup);
+										}];
 }
 
 #pragma mark - App State

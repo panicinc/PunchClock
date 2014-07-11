@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Panic Inc. All rights reserved.
 //
 
+#import "PCBackend.h"
 #import "PCStatusTableDataSource.h"
 #import "PCStatusLabel.h"
-#import <AFNetworking/AFNetworking.h>
-#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface PCStatusTableDataSource()
 
@@ -52,33 +51,18 @@ static NSString *cellIdentifier = @"StatusTableCell";
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:@"username"];
 
-	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
-	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
+	PCBackend *backend = [PCBackend sharedBackend];
+	[backend fetchPeopleForUsername:username
+							success:^(id responseObject) {
+								self.fetchedPeople = (NSArray *)responseObject;
 
-	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET"
-																	  URLString:[NSString stringWithFormat:@"%@/status/list", PCbaseURL]
-																	 parameters:@{@"name": username}
-																		  error:nil];
-
-
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
-
-        self.fetchedPeople = (NSArray *)responseObject;
-
-		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusesUpdated" object:self.numberOfPeopleIn]];
-		self.fetchingPeople = NO;
-
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
-		DDLogError(@"Fetching Statuses failed: %@", error.localizedDescription);
-		self.fetchingPeople = NO;
-
-    }];
-
-    [operation start];
-
+								[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusesUpdated" object:self.numberOfPeopleIn]];
+								self.fetchingPeople = NO;
+							} failure:^(NSError *error) {
+								DDLogError(@"Fetching Statuses failed: %@", error.localizedDescription);
+								self.fetchingPeople = NO;
+								
+							}];
 }
 
 - (NSNumber *)numberOfPeopleIn
@@ -116,23 +100,16 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 		// Image
 		NSString *username = [person objectForKey:@"name"];
-		NSString *imageURL = [[NSString stringWithFormat:@"%@/image/%@", PCbaseURL, username] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-		AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-		[serializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
-		NSMutableURLRequest *URLRequest = [serializer requestWithMethod:@"GET" URLString:imageURL parameters:nil error:nil];
-
 
 		UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
-		[imageView.layer setCornerRadius:imageView.frame.size.width / 2];
-		[imageView setClipsToBounds:YES];
-		[imageView setImageWithURLRequest:URLRequest
-						 placeholderImage:[UIImage imageNamed:@"unknown"]
-								  success:nil
-								  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-									  DDLogError(@"image fetch failed: %@\n%@", response, error);
 
-								  }];
+		PCBackend *backend = [PCBackend sharedBackend];
+		[backend setImage:imageView
+			  forUsername:username
+		 placeholderImage:[UIImage imageNamed:@"unknown"]
+				  failure:^(NSString *errorMessage) {
+					  DDLogError(@"image fetch failed: %@", errorMessage);
+				  }];
 
 		// Name label
 		NSString *personLabel = [username capitalizedString];
