@@ -194,18 +194,12 @@
 				1A791DBF18442884000943E4 /* PCAppDelegate.h */,
 				1A791DC018442884000943E4 /* PCAppDelegate.m */,
 				1A31D8661858D09D00BA2CFE /* UI */,
+				302AACE91970C8F20022570A /* Backend */,
+				302AACEA1970C90B0022570A /* Push Service */,
 				1A4C2980184DACE300CD0868 /* PCLocationManager.h */,
 				1A4C2981184DACE300CD0868 /* PCLocationManager.m */,
 				1A8439A018F8BEFE00F3AC85 /* constants.h */,
 				1A791DB718442884000943E4 /* Supporting Files */,
-				30195B41196F76670067E4E2 /* PCBackend.h */,
-				30195B42196F76670067E4E2 /* PCBackend.m */,
-				30195B44196F7B3F0067E4E2 /* PCHerokuBackend.h */,
-				30195B45196F7B3F0067E4E2 /* PCHerokuBackend.m */,
-				3058ED3619701FC9006DE87B /* PCPushService.h */,
-				3058ED3719701FC9006DE87B /* PCPushService.m */,
-				302AACE61970B6A70022570A /* PCZeroPushService.h */,
-				302AACE71970B6A70022570A /* PCZeroPushService.m */,
 			);
 			path = PunchClock;
 			sourceTree = "<group>";
@@ -247,6 +241,28 @@
 				1AF7D58018501141006B1FA4 /* HockeySDKResources.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		302AACE91970C8F20022570A /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				30195B41196F76670067E4E2 /* PCBackend.h */,
+				30195B42196F76670067E4E2 /* PCBackend.m */,
+				30195B44196F7B3F0067E4E2 /* PCHerokuBackend.h */,
+				30195B45196F7B3F0067E4E2 /* PCHerokuBackend.m */,
+			);
+			name = Backend;
+			sourceTree = "<group>";
+		};
+		302AACEA1970C90B0022570A /* Push Service */ = {
+			isa = PBXGroup;
+			children = (
+				3058ED3619701FC9006DE87B /* PCPushService.h */,
+				3058ED3719701FC9006DE87B /* PCPushService.m */,
+				302AACE61970B6A70022570A /* PCZeroPushService.h */,
+				302AACE71970B6A70022570A /* PCZeroPushService.m */,
+			);
+			name = "Push Service";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
