@@ -8,6 +8,6 @@
 
 #import "PCBackend.h"
 
-@interface PCHerokuBackend : PCBackend
+@interface PCHerokuBackend : NSObject <PCBackend>
 
 @end
