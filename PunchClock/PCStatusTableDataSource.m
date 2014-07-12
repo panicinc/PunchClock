@@ -51,7 +51,7 @@ static NSString *cellIdentifier = @"StatusTableCell";
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:@"username"];
 
-	PCBackend *backend = [PCBackend sharedBackend];
+	id<PCBackend> backend = [PCBackend sharedBackend];
 	[backend fetchPeopleForUsername:username
 							success:^(id responseObject) {
 								self.fetchedPeople = (NSArray *)responseObject;
@@ -103,7 +103,7 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 		UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
 
-		PCBackend *backend = [PCBackend sharedBackend];
+		id<PCBackend> backend = [PCBackend sharedBackend];
 		[backend setImage:imageView
 			  forUsername:username
 		 placeholderImage:[UIImage imageNamed:@"unknown"]

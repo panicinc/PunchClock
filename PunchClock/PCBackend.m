@@ -10,77 +10,20 @@
 
 @implementation PCBackend
 
-+ (PCBackend *)sharedBackend
++ (id<PCBackend>)sharedBackend
 {
 	static dispatch_once_t onceToken;
-	static PCBackend *sharedBackend = nil;
+	static id<PCBackend> sharedBackend = nil;
 	dispatch_once(&onceToken, ^{
 		Class cls = NSClassFromString(backendClass);
-
-		if (cls == nil) {
-			cls = self;
-		}
+		NSAssert(cls != nil, @"No such backend class found: %@", backendClass);
 
 		sharedBackend = [[cls alloc] init];
+		NSAssert([sharedBackend conformsToProtocol: @protocol(PCBackend)],
+				 @"Push backend %@ does not conform to PCBackend protocol", backendClass);
 	});
 
 	return sharedBackend;
-}
-
-- (NSError *)notImplementedError
-{
-	return [NSError errorWithDomain:@"com.panic.PunchClock"
-							   code:0
-						   userInfo:@{NSLocalizedDescriptionKey : @"Attempted to use PCBackend base class"}];
-}
-
-- (void)updateWithStatus:(NSString *)status
-					name:(NSString *)username
-				 push_id:(NSString *)push_id
-			beacon_minor:(NSNumber *)beacon_minor
-				 success:(void (^)(id responseObject))success
-				 failure:(void (^)(NSError *error))failure
-{
-	failure([self notImplementedError]);
-}
-
-- (void)sendMessage:(NSString *)message
-	   fromUsername:(NSString *)username
-			success:(void (^)(id responseObject))success
-			failure:(void (^)(NSError *error))failure
-{
-	failure([self notImplementedError]);
-}
-
-- (void)watchUser:(NSString *)name
-		 username:(NSString *)username
-		  success:(void (^)(id responseObject))success
-		  failure:(void (^)(NSError *error))failure
-{
-	failure([self notImplementedError]);
-}
-
-- (void)unwatchUser:(NSString *)name
-		   username:(NSString *)username
-			success:(void (^)(id responseObject))success
-			failure:(void (^)(NSError *error))failure
-{
-	failure([self notImplementedError]);
-}
-
-- (void)fetchPeopleForUsername:(NSString *)username
-					   success:(void (^)(id responseObject))success
-					   failure:(void (^)(NSError *error))failure
-{
-	failure([self notImplementedError]);
-}
-
-- (void)setImage:(UIImageView *)imageView
-	 forUsername:(NSString *)username
-placeholderImage:(UIImage *)placeholderImage
-		 failure:(void (^)(NSString *errorMessage))failure
-{
-	failure([[self notImplementedError] localizedDescription]);
 }
 
 @end

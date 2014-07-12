@@ -18,11 +18,9 @@
 		Class cls = NSClassFromString(pushServiceClass);
 		NSAssert(cls != nil, @"No such push service class found: %@", pushServiceClass);
 
-		if (cls != nil) {
-			sharedPushService = [[cls alloc] init];
-			NSAssert([sharedPushService conformsToProtocol: @protocol(PCPushService)],
-					 @"Push service class %@ does not conform to PCPushService protocol", pushServiceClass);
-		}
+		sharedPushService = [[cls alloc] init];
+		NSAssert([sharedPushService conformsToProtocol: @protocol(PCPushService)],
+				 @"Push service class %@ does not conform to PCPushService protocol", pushServiceClass);
 	});
 
 	return sharedPushService;

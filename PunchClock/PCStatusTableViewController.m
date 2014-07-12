@@ -96,7 +96,7 @@
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusUpdated" object:nil]];
 	};
 
-	PCBackend *backend = [PCBackend sharedBackend];
+	id<PCBackend> backend = [PCBackend sharedBackend];
 
 	if (sender.selected) {
 		[backend watchUser:name

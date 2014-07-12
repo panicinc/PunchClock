@@ -8,16 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PCBackend : NSObject
-
-+ (PCBackend *)sharedBackend;
+@protocol PCBackend <NSObject>
 
 - (void)updateWithStatus:(NSString *)status
 					name:(NSString *)username
 				 push_id:(NSString *)push_id
 			beacon_minor:(NSNumber *)beacon_minor
-				success:(void (^)(id responseObject))success
-				failure:(void (^)(NSError *error))failure;
+				 success:(void (^)(id responseObject))success
+				 failure:(void (^)(NSError *error))failure;
 
 - (void)sendMessage:(NSString *)message
 	   fromUsername:(NSString *)username
@@ -42,5 +40,11 @@
 	 forUsername:(NSString *)username
 placeholderImage:(UIImage *)placeholderImage
 		 failure:(void (^)(NSString *errorMessage))failure;
+
+@end
+
+@interface PCBackend : NSObject
+
++ (id<PCBackend>)sharedBackend;
 
 @end

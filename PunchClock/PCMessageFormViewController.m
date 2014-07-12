@@ -38,7 +38,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:@"username"];
 
-	PCBackend *backend = [PCBackend sharedBackend];
+	id<PCBackend> backend = [PCBackend sharedBackend];
 	[backend sendMessage:message
 			fromUsername:username
 				 success:^(id responseObject) {
