@@ -120,7 +120,7 @@
 			success:(void (^)(id responseObject))success
 			failure:(void (^)(NSError *error))failure
 {
-	[self performAction:@"watch"
+	[self performAction:@"unwatch"
 				 onUser:name
 			   username:username
 				success:success

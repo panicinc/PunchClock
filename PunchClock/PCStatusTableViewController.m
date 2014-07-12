@@ -99,15 +99,16 @@
 	id<PCBackend> backend = [PCBackend sharedBackend];
 
 	if (sender.selected) {
-		[backend watchUser:name
-				  username:username
-				   success:success
-				   failure:failure];
-	} else {
 		[backend unwatchUser:name
 					username:username
 					 success:success
 					 failure:failure];
+
+	} else {
+		[backend watchUser:name
+				  username:username
+				   success:success
+				   failure:failure];
 	}
 }
 
