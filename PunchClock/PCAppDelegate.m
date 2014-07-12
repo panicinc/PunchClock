@@ -7,9 +7,15 @@
 //
 
 #import "PCAppDelegate.h"
+#import "PCPushService.h"
 #import <HockeySDK/HockeySDK.h>
 #import <KeychainItemWrapper/KeychainItemWrapper.h>
-#import <ZeroPush/ZeroPush.h>
+
+@interface PCAppDelegate ()
+
+@property (nonatomic, readwrite, strong) id<PCPushService> pushService;
+
+@end
 
 @implementation PCAppDelegate
 
@@ -59,6 +65,7 @@
 	[[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"username" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial) context:NULL];
 
 	self.locationManager = [PCLocationManager sharedLocationManager];
+	self.pushService = [PCPushService sharedPushService];
 
 	[application setStatusBarHidden:NO];
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -143,8 +150,7 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)tokenData
 {
-    [[ZeroPush shared] registerDeviceToken:tokenData];
-    NSString *tokenString = [ZeroPush deviceTokenFromData:tokenData];
+	NSString *tokenString = [[self pushService] registerDeviceToken:tokenData];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:tokenString forKey:@"push_id"];
 
@@ -242,15 +248,9 @@
 	// Called when the control center is dismissed
 	[self.locationManager enterForeground];
 
-#ifdef CONFIGURATION_Debug
-	[ZeroPush engageWithAPIKey:zeroPushDevKey delegate:self];
-#else
-	[ZeroPush engageWithAPIKey:zeroPushProdKey delegate:self];
-#endif
-
-    [[ZeroPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |
-                                                           UIRemoteNotificationTypeBadge |
-                                                           UIRemoteNotificationTypeSound)];
+	[[self pushService] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |
+															UIRemoteNotificationTypeBadge |
+															UIRemoteNotificationTypeSound)];
 
 
 	if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
