@@ -32,10 +32,13 @@
 		1AF7D58518501169006B1FA4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D58418501169006B1FA4 /* CoreText.framework */; };
 		1AF7D58718501195006B1FA4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D58618501195006B1FA4 /* Security.framework */; };
 		1AF7D5891850119F006B1FA4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */; };
+		3015ACF219733C2C00ED1486 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3015ACF119733C2C00ED1486 /* Localizable.strings */; };
 		30195B43196F76670067E4E2 /* PCBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 30195B42196F76670067E4E2 /* PCBackend.m */; };
 		30195B46196F7B3F0067E4E2 /* PCHerokuBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 30195B45196F7B3F0067E4E2 /* PCHerokuBackend.m */; };
 		302AACE81970B6A70022570A /* PCZeroPushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 302AACE71970B6A70022570A /* PCZeroPushService.m */; };
 		3058ED3819701FC9006DE87B /* PCPushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3058ED3719701FC9006DE87B /* PCPushService.m */; };
+		30B4F61519722BD50051BF3F /* PCCloudKitPushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B4F61419722BD50051BF3F /* PCCloudKitPushService.m */; };
+		30B4F61819722FC90051BF3F /* PCCloudKitBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B4F61719722FC90051BF3F /* PCCloudKitBackend.m */; };
 		D40341EAF4384A82B93FCE57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE64CEC02D345349586E792 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +91,7 @@
 		1AF7D58418501169006B1FA4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1AF7D58618501195006B1FA4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3015ACF119733C2C00ED1486 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		30195B41196F76670067E4E2 /* PCBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCBackend.h; sourceTree = "<group>"; };
 		30195B42196F76670067E4E2 /* PCBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCBackend.m; sourceTree = "<group>"; };
 		30195B44196F7B3F0067E4E2 /* PCHerokuBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCHerokuBackend.h; sourceTree = "<group>"; };
@@ -96,6 +100,10 @@
 		302AACE71970B6A70022570A /* PCZeroPushService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCZeroPushService.m; sourceTree = "<group>"; };
 		3058ED3619701FC9006DE87B /* PCPushService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCPushService.h; sourceTree = "<group>"; };
 		3058ED3719701FC9006DE87B /* PCPushService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCPushService.m; sourceTree = "<group>"; };
+		30B4F61319722BD50051BF3F /* PCCloudKitPushService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCloudKitPushService.h; sourceTree = "<group>"; };
+		30B4F61419722BD50051BF3F /* PCCloudKitPushService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudKitPushService.m; sourceTree = "<group>"; };
+		30B4F61619722FC90051BF3F /* PCCloudKitBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCloudKitBackend.h; sourceTree = "<group>"; };
+		30B4F61719722FC90051BF3F /* PCCloudKitBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudKitBackend.m; sourceTree = "<group>"; };
 		3EE64CEC02D345349586E792 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,6 +228,7 @@
 				1A88E3531868FAA80084EF92 /* Podfile */,
 				1A8439A518FC640A00F3AC85 /* status.caf */,
 				1A8439A618FC640A00F3AC85 /* message.caf */,
+				3015ACF119733C2C00ED1486 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -250,6 +259,8 @@
 				30195B42196F76670067E4E2 /* PCBackend.m */,
 				30195B44196F7B3F0067E4E2 /* PCHerokuBackend.h */,
 				30195B45196F7B3F0067E4E2 /* PCHerokuBackend.m */,
+				30B4F61619722FC90051BF3F /* PCCloudKitBackend.h */,
+				30B4F61719722FC90051BF3F /* PCCloudKitBackend.m */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -261,6 +272,8 @@
 				3058ED3719701FC9006DE87B /* PCPushService.m */,
 				302AACE61970B6A70022570A /* PCZeroPushService.h */,
 				302AACE71970B6A70022570A /* PCZeroPushService.m */,
+				30B4F61319722BD50051BF3F /* PCCloudKitPushService.h */,
+				30B4F61419722BD50051BF3F /* PCCloudKitPushService.m */,
 			);
 			name = "Push Service";
 			sourceTree = "<group>";
@@ -335,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A791DC918442884000943E4 /* Images.xcassets in Resources */,
+				3015ACF219733C2C00ED1486 /* Localizable.strings in Resources */,
 				1A8439A718FC640A00F3AC85 /* status.caf in Resources */,
 				1A791DBB18442884000943E4 /* InfoPlist.strings in Resources */,
 				1A791DC418442884000943E4 /* Main.storyboard in Resources */,
@@ -405,8 +419,10 @@
 				1A791DC718442884000943E4 /* PCLocationTableViewController.m in Sources */,
 				3058ED3819701FC9006DE87B /* PCPushService.m in Sources */,
 				30195B43196F76670067E4E2 /* PCBackend.m in Sources */,
+				30B4F61519722BD50051BF3F /* PCCloudKitPushService.m in Sources */,
 				1A30A7EC18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m in Sources */,
 				1A01C2171857E2080089B546 /* PCStatusTableDataSource.m in Sources */,
+				30B4F61819722FC90051BF3F /* PCCloudKitBackend.m in Sources */,
 				1A4CF3C018E3812E0086BCC0 /* UIView+Borders.m in Sources */,
 				1A4CF3B818E24E2C0086BCC0 /* PCMessageFormViewController.m in Sources */,
 				1A31D8691858D13700BA2CFE /* PCStatusTableViewController.m in Sources */,
