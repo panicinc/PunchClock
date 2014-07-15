@@ -164,7 +164,7 @@
 	//if the notification doesn't say there is content available just return
     NSDictionary *aps = [userInfo objectForKey:@"aps"];
 
-    if (![[aps objectForKey:@"content-available"] intValue]) {
+	if (![[aps objectForKey:@"content-available"] intValue]) {
         DDLogDebug(@"Updating Status List");
 
 		NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];

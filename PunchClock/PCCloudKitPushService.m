@@ -15,7 +15,7 @@
 
 - (NSString *)registerDeviceToken:(NSData *)tokenData
 {
-	return @"";
+	return @"CloudKit";
 }
 
 - (void)registerForRemoteNotificationTypes:(UIRemoteNotificationType)types

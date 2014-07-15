@@ -7,4 +7,4 @@
 */
 
 "StatusChangeNotification" = "%@ is %@";
-"MessageNotification" = "%@: %@";
+"MessageNotification" = "%K: %K";

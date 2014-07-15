@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HjO-G5-yxc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HjO-G5-yxc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
         <!--Location Table-->
         <scene sceneID="Qyz-L5-hfN">
             <objects>
                 <tableViewController id="jSq-gT-Enl" userLabel="Location Table" customClass="PCLocationTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="35" sectionHeaderHeight="5" sectionFooterHeight="5" id="3M5-j1-avP">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="35" sectionHeaderHeight="5" sectionFooterHeight="5" id="3M5-j1-avP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="601"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.078431372549019607" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
@@ -17,7 +18,7 @@
                         <sections>
                             <tableViewSection id="Qc2-In-s3Z">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="XAB-yd-Cfl">
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="XAB-yd-Cfl">
                                         <rect key="frame" x="0.0" y="35" width="320" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XAB-yd-Cfl" id="Bth-B1-zDY">
@@ -42,7 +43,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.270588249" green="0.18823531269999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="puW-Iu-7bK">
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="puW-Iu-7bK">
                                         <rect key="frame" x="0.0" y="70" width="320" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="puW-Iu-7bK" id="KK1-YA-rJ9">
@@ -415,7 +416,7 @@
             </objects>
             <point key="canvasLocation" x="495" y="536"/>
         </scene>
-        <!--Status Table View Controller - Team-->
+        <!--Team-->
         <scene sceneID="fxV-jx-bWd">
             <objects>
                 <viewController id="fDc-ah-AGI" customClass="PCStatusTableViewController" sceneMemberID="viewController">
@@ -454,19 +455,20 @@
                                 <color key="backgroundColor" red="0.270588249" green="0.18823531269999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="wle-JZ-zpa" secondAttribute="centerY" id="Ryg-WZ-1bu"/>
+                                    <constraint firstAttribute="height" constant="44" id="uAA-gD-IW4"/>
                                     <constraint firstAttribute="centerX" secondItem="wle-JZ-zpa" secondAttribute="centerX" constant="-4.5" id="v2E-IJ-hEq"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yRk-pg-sQs">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="AhI-65-YQB">
+                                    <tableView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="AhI-65-YQB">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <color key="backgroundColor" red="0.270588249" green="0.18823531269999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="separatorColor" red="0.270588249" green="0.18823531269999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatusTableCell" id="LTX-9K-Dfm">
+                                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatusTableCell" id="LTX-9K-Dfm">
                                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LTX-9K-Dfm" id="D6J-xp-dkP">
@@ -519,7 +521,6 @@
                         <constraints>
                             <constraint firstItem="VOS-f3-3eO" firstAttribute="top" secondItem="pzl-rx-y5P" secondAttribute="bottom" id="41B-S8-oal"/>
                             <constraint firstAttribute="centerX" secondItem="VOS-f3-3eO" secondAttribute="centerX" id="TeZ-km-sTj"/>
-                            <constraint firstItem="AR2-Nn-z3m" firstAttribute="top" secondItem="VOS-f3-3eO" secondAttribute="bottom" constant="455" id="jPw-zt-vJ6"/>
                             <constraint firstItem="VOS-f3-3eO" firstAttribute="leading" secondItem="dE6-QQ-SxI" secondAttribute="leading" id="u2E-e3-e8e"/>
                             <constraint firstAttribute="trailing" secondItem="VOS-f3-3eO" secondAttribute="trailing" id="zQG-Mx-Cmp"/>
                         </constraints>
@@ -538,7 +539,7 @@
             </objects>
             <point key="canvasLocation" x="1029" y="899"/>
         </scene>
-        <!--Message Form View Controller - Message-->
+        <!--Message-->
         <scene sceneID="4HP-uh-fAc">
             <objects>
                 <viewController storyboardIdentifier="messsageForm" title="Message" id="2wa-Mo-zWR" customClass="PCMessageFormViewController" sceneMemberID="viewController">
@@ -635,7 +636,7 @@
             </objects>
             <point key="canvasLocation" x="1969" y="335"/>
         </scene>
-        <!--Navigation Controller - Information-->
+        <!--Information-->
         <scene sceneID="2l4-Tj-ALa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="T2N-Si-LxJ" sceneMemberID="viewController">
@@ -686,7 +687,10 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="T4s-PK-4NR"/>
