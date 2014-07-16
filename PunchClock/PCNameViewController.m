@@ -19,6 +19,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
+
 	self.nameField.layer.cornerRadius = 3.0;
 	
 	self.nameField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
