@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString *beaconDistance;
 @property (nonatomic, strong) NSString *officeDistance;
 @property (nonatomic, strong) CLBeacon *closestBeacon;
+@property (nonatomic, strong) CLLocation *location;
 
 @property BOOL inRange;
 @property BOOL nearOffice;
@@ -476,13 +477,13 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
 
-	CLLocation *location = [locations lastObject];
-	NSDate *eventDate = location.timestamp;
+	self.location = [locations lastObject];
+	NSDate *eventDate = self.location.timestamp;
 	NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
 
 	if (howRecent < 15.0) {
 
-		self.officeDistanceValue = [self.officeLocation distanceFromLocation:location];
+		self.officeDistanceValue = [self.officeLocation distanceFromLocation:self.location];
 
 		MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
 		formatter.units = MKDistanceFormatterUnitsImperial;
@@ -490,7 +491,7 @@
 
 		DDLogVerbose(@"Distance from office %f", self.officeDistanceValue);
 
-		if ([self.officeRegion containsCoordinate:location.coordinate]) {
+		if ([self.officeRegion containsCoordinate:self.location.coordinate]) {
 			self.nearOffice = YES;
 		} else {
 			self.nearOffice = NO;
