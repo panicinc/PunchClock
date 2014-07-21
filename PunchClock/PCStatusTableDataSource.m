@@ -116,7 +116,8 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 		// Image
 		NSString *username = [person objectForKey:@"name"];
-		NSString *imageURL = [NSString stringWithFormat:@"%@/image/%@", PCbaseURL, username];
+        NSString *encodedUsername = [username stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+		NSString *imageURL = [NSString stringWithFormat:@"%@/image/%@", PCbaseURL, encodedUsername];
 
 		AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
 		[serializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
