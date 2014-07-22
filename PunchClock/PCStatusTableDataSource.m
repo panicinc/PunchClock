@@ -147,7 +147,10 @@ static NSString *cellIdentifier = @"StatusTableCell";
 		NSNumber *watched_by_value = (NSNumber *)[person objectForKey:@"watched_by_requestor"];
 		bell.selected = [watched_by_value boolValue];
 
-		if ([push_id isEqualToString:@""]) {
+		NSString *ownUsername = [[defaults valueForKey:@"username"] lowercaseString];
+		BOOL cellIsOwnUser = [[username lowercaseString] isEqualToString:ownUsername];
+
+		if ([push_id isEqualToString:@""] || cellIsOwnUser) {
 			bell.hidden = YES;
 		}
 
