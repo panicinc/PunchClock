@@ -88,9 +88,11 @@
 
 	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
 	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
+	
+	NSString *urlString = [[NSString stringWithFormat:@"%@/%@/%@", PCbaseURL, action, name] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
 	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:[NSString stringWithFormat:@"%@/%@/%@", PCbaseURL, action, name]
+																	  URLString:urlString
 																	 parameters:@{@"name": username}
 																		  error:nil];
 
