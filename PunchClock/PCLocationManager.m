@@ -486,7 +486,7 @@
 		self.officeDistanceValue = [self.officeLocation distanceFromLocation:self.location];
 
 		MKDistanceFormatter *formatter = [[MKDistanceFormatter alloc] init];
-		formatter.units = MKDistanceFormatterUnitsImperial;
+		formatter.units = MKDistanceFormatterUnitsDefault;
 		self.officeDistance = [formatter stringFromDistance:self.officeDistanceValue];
 
 		DDLogVerbose(@"Distance from office %f", self.officeDistanceValue);
