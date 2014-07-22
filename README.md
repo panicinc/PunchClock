@@ -10,12 +10,11 @@ PunchClock is an in/out tracking app for iOS 7+ that uses iBeacon and Geofencing
 Building
 --------
 
-In order to build PunchClock you'll need to do a few things:
+In order to build PunchClock you'll need run the install script:
 
-- `$ cp PunchClock/constants.h.sample PunchClock/constants.h`
-- `$ cp PunchClock/PunchClock_Beta.xcconfig.sample PunchClock/PunchClock_Beta.xcconfig`
-- `$ cp PunchClock/PunchClock_Debug.xcconfig.sample PunchClock/PunchClock_Debug.xcconfig`
-- `$ pod install`
+- `$ ./setup`
+
+This script sets up a `constants.h` file, two **.xcconfig** files and runs `pod install`
 
 The `constants.h` file will need to be customized for your environment. It's meant to allow you to run PunchClock against a local copy of the server during development and a production server after release. If you don't plan to use the Hockey or push notifications you can set those things to nil.
 

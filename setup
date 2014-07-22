@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+if [ ! -f PunchClock/constants.h ]; then
+  cp PunchClock/constants.h.sample PunchClock/constants.h
+  echo "Copied PunchClock/constants.h.sample to PunchClock/constants.h"
+fi
+
+if [ ! -f PunchClock/PunchClock_Beta.xcconfig ]; then
+  cp PunchClock/PunchClock_Beta.xcconfig.sample PunchClock/PunchClock_Beta.xcconfig
+  echo "Copied PunchClock/PunchClock_Beta.xcconfig.sample to PunchClock/PunchClock_Beta.xcconfig"
+fi
+
+if [ ! -f PunchClock/PunchClock_Debug.xcconfig ]; then
+  cp PunchClock/PunchClock_Debug.xcconfig.sample PunchClock/PunchClock_Debug.xcconfig
+  echo "Copied PunchClock/PunchClock_Debug.xcconfig.sample to PunchClock/PunchClock_Debug.xcconfig"
+fi
+
+if hash pod >/dev/null; then
+  pod install
+else
+  echo "Cocoapods is not available in your path, make sure you have it installed and run this script again"
+fi
