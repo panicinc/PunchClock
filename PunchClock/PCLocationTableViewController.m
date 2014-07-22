@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *inOfficeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *inRangeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *latitudeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *longitudeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *isRangingLabel;
 @property (strong, nonatomic) IBOutlet UILabel *lastUpdateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
@@ -87,6 +89,10 @@
 				self.closestBeaconLabel.text = @"?";
 				self.beaconSignalStrengthLabel.text = @"?";
 			}
+		} else if ([keyPath isEqualToString:@"location"]) {
+			CLLocation *newLocation = (CLLocation *)[change objectForKey:NSKeyValueChangeNewKey];
+			self.latitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
+			self.longitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
 		}
 
 	} else if (object == [NSUserDefaults standardUserDefaults]) {
@@ -111,6 +117,7 @@
 
 	[self.locationManager addObserver:self forKeyPath:@"nearOffice" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )  context:NULL];
 	[self.locationManager addObserver:self forKeyPath:@"inRange" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )  context:NULL];
+	[self.locationManager addObserver:self forKeyPath:@"location" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )  context:NULL];
 	[self.locationManager addObserver:self forKeyPath:@"isRanging" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )  context:NULL];
 	[self.locationManager addObserver:self forKeyPath:@"lastNotificationDate" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)  context:NULL];
 	[self.locationManager addObserver:self forKeyPath:@"beaconDistance" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)  context:NULL];
@@ -138,6 +145,7 @@
 	[self.locationManager removeObserver:self forKeyPath:@"officeDistance"];
 	[self.locationManager removeObserver:self forKeyPath:@"locationStatus"];
 	[self.locationManager removeObserver:self forKeyPath:@"closestBeacon"];
+	[self.locationManager removeObserver:self forKeyPath:@"location"];
 	[[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"username"];
 }
 
