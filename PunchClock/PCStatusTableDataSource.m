@@ -124,6 +124,8 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 
 		UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
+		[imageView.layer setCornerRadius:imageView.frame.size.width / 2];
+		[imageView setClipsToBounds:YES];
 		[imageView setImageWithURLRequest:URLRequest
 						 placeholderImage:[UIImage imageNamed:@"unknown"]
 								  success:nil
