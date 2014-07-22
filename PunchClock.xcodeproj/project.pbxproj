@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073D18A6197DDAFE00B92209 /* PCMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073D18A5197DDAFE00B92209 /* PCMessagesTableViewController.m */; };
+		073D18A9197DDC1100B92209 /* PCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073D18A8197DDC1100B92209 /* PCTableViewController.m */; };
+		073D18AC197DE41B00B92209 /* PCMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073D18AB197DE41B00B92209 /* PCMessageTableViewCell.m */; };
 		1A01C2171857E2080089B546 /* PCStatusTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A01C2161857E2080089B546 /* PCStatusTableDataSource.m */; };
 		1A30A7EC18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A30A7EB18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m */; };
 		1A31D8691858D13700BA2CFE /* PCStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A31D8681858D13700BA2CFE /* PCStatusTableViewController.m */; };
@@ -36,6 +39,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		073D18A4197DDAFE00B92209 /* PCMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMessagesTableViewController.h; sourceTree = "<group>"; };
+		073D18A5197DDAFE00B92209 /* PCMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMessagesTableViewController.m; sourceTree = "<group>"; };
+		073D18A7197DDC1100B92209 /* PCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTableViewController.h; sourceTree = "<group>"; };
+		073D18A8197DDC1100B92209 /* PCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCTableViewController.m; sourceTree = "<group>"; };
+		073D18AA197DE41B00B92209 /* PCMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMessageTableViewCell.h; sourceTree = "<group>"; };
+		073D18AB197DE41B00B92209 /* PCMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMessageTableViewCell.m; sourceTree = "<group>"; };
 		1A01C2151857E2080089B546 /* PCStatusTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCStatusTableDataSource.h; sourceTree = "<group>"; };
 		1A01C2161857E2080089B546 /* PCStatusTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCStatusTableDataSource.m; sourceTree = "<group>"; };
 		1A30A7EA18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCFileFunctionLevelFormatter.h; sourceTree = "<group>"; };
@@ -85,7 +94,7 @@
 		1AF7D58618501195006B1FA4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EE64CEC02D345349586E792 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,20 +121,13 @@
 			isa = PBXGroup;
 			children = (
 				1A791DC218442884000943E4 /* Main.storyboard */,
-				1A791DC518442884000943E4 /* PCLocationTableViewController.h */,
-				1A791DC618442884000943E4 /* PCLocationTableViewController.m */,
-				1A31D8671858D13700BA2CFE /* PCStatusTableViewController.h */,
-				1A31D8681858D13700BA2CFE /* PCStatusTableViewController.m */,
-				1A01C2151857E2080089B546 /* PCStatusTableDataSource.h */,
-				1A01C2161857E2080089B546 /* PCStatusTableDataSource.m */,
-				1A5E10F818779CB30079CC56 /* PCStatusLabel.h */,
-				1A5E10F918779CB30079CC56 /* PCStatusLabel.m */,
-				1AD4978D18D2279100817DD3 /* PCNameViewController.h */,
-				1AD4978E18D2279100817DD3 /* PCNameViewController.m */,
+				1AE7EEBF197F0728003F577B /* Team */,
+				1AE7EEBE197F0714003F577B /* Information */,
+				1AE7EEC0197F0744003F577B /* Messages */,
 				1A631DD018D77AF6004B7D90 /* PCTabBarController.h */,
 				1A631DD118D77AF6004B7D90 /* PCTabBarController.m */,
-				1A4CF3B618E24E2C0086BCC0 /* PCMessageFormViewController.h */,
-				1A4CF3B718E24E2C0086BCC0 /* PCMessageFormViewController.m */,
+				073D18A7197DDC1100B92209 /* PCTableViewController.h */,
+				073D18A8197DDC1100B92209 /* PCTableViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -145,7 +147,6 @@
 				1A791DB618442884000943E4 /* PunchClock */,
 				1A791DAF18442884000943E4 /* Frameworks */,
 				1A791DAE18442884000943E4 /* Products */,
-				8DB6B02B2DC5489086E7656C /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,6 +196,7 @@
 			children = (
 				1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */,
 				1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */,
+				8DB6B02B2DC5489086E7656C /* Pods.xcconfig */,
 				1A30A7EA18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.h */,
 				1A30A7EB18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m */,
 				1A4CF3B918E3812E0086BCC0 /* UIView-Borders */,
@@ -208,6 +210,43 @@
 				1A8439A618FC640A00F3AC85 /* message.caf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AE7EEBE197F0714003F577B /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				1A791DC518442884000943E4 /* PCLocationTableViewController.h */,
+				1A791DC618442884000943E4 /* PCLocationTableViewController.m */,
+				1AD4978D18D2279100817DD3 /* PCNameViewController.h */,
+				1AD4978E18D2279100817DD3 /* PCNameViewController.m */,
+			);
+			name = Information;
+			sourceTree = "<group>";
+		};
+		1AE7EEBF197F0728003F577B /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				1A31D8671858D13700BA2CFE /* PCStatusTableViewController.h */,
+				1A31D8681858D13700BA2CFE /* PCStatusTableViewController.m */,
+				1A01C2151857E2080089B546 /* PCStatusTableDataSource.h */,
+				1A01C2161857E2080089B546 /* PCStatusTableDataSource.m */,
+				1A5E10F818779CB30079CC56 /* PCStatusLabel.h */,
+				1A5E10F918779CB30079CC56 /* PCStatusLabel.m */,
+				1A4CF3B618E24E2C0086BCC0 /* PCMessageFormViewController.h */,
+				1A4CF3B718E24E2C0086BCC0 /* PCMessageFormViewController.m */,
+			);
+			name = Team;
+			sourceTree = "<group>";
+		};
+		1AE7EEC0197F0744003F577B /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				073D18A4197DDAFE00B92209 /* PCMessagesTableViewController.h */,
+				073D18A5197DDAFE00B92209 /* PCMessagesTableViewController.m */,
+				073D18AA197DE41B00B92209 /* PCMessageTableViewCell.h */,
+				073D18AB197DE41B00B92209 /* PCMessageTableViewCell.m */,
+			);
+			name = Messages;
 			sourceTree = "<group>";
 		};
 		1AF7D57C18501141006B1FA4 /* HockeySDK.embeddedframework */ = {
@@ -361,15 +400,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AD4978F18D2279100817DD3 /* PCNameViewController.m in Sources */,
+				073D18A6197DDAFE00B92209 /* PCMessagesTableViewController.m in Sources */,
 				1A791DBD18442884000943E4 /* main.m in Sources */,
 				1A5E10FA18779CB30079CC56 /* PCStatusLabel.m in Sources */,
 				1A4C2982184DACE300CD0868 /* PCLocationManager.m in Sources */,
 				1A631DD218D77AF6004B7D90 /* PCTabBarController.m in Sources */,
+				073D18A9197DDC1100B92209 /* PCTableViewController.m in Sources */,
 				1A791DC718442884000943E4 /* PCLocationTableViewController.m in Sources */,
 				1A30A7EC18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m in Sources */,
 				1A01C2171857E2080089B546 /* PCStatusTableDataSource.m in Sources */,
 				1A4CF3C018E3812E0086BCC0 /* UIView+Borders.m in Sources */,
 				1A4CF3B818E24E2C0086BCC0 /* PCMessageFormViewController.m in Sources */,
+				073D18AC197DE41B00B92209 /* PCMessageTableViewCell.m in Sources */,
 				1A31D8691858D13700BA2CFE /* PCStatusTableViewController.m in Sources */,
 				1A791DC118442884000943E4 /* PCAppDelegate.m in Sources */,
 			);
