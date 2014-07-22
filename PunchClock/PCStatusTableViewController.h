@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PCTableViewController.h"
 
-@interface PCStatusTableViewController : UIViewController
+@interface PCStatusTableViewController : PCTableViewController
 
 @end
