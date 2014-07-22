@@ -12,15 +12,10 @@
 #import <MZFormSheetController/MZFormSheetController.h>
 #import <MZFormSheetController/MZFormSheetSegue.h>
 #import "PCMessageFormViewController.h"
-#import "UIView+Borders.h"
 
 @interface PCStatusTableViewController () <MZFormSheetBackgroundWindowDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) IBOutlet UIButton *messageButton;
-@property (strong, nonatomic) IBOutlet UIView *topToolbar;
-@property (strong, nonatomic) IBOutlet UILabel *toolbarTitle;
 
 @end
 
@@ -120,13 +115,13 @@
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
+	[super viewDidLoad];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(refreshData:)
 												 name:UIApplicationDidBecomeActiveNotification
 											   object:nil];
-	
+
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(refreshData:)
 												 name:@"StatusUpdated"
@@ -144,20 +139,12 @@
 		[self performSegueWithIdentifier:@"missingNameStatus" sender:self];
 	}
 
-	UITableViewController *tableViewController = [[UITableViewController alloc] init];
-    tableViewController.tableView = self.tableView;
-
-    self.refreshControl = [[UIRefreshControl alloc] init];
-	self.refreshControl.tintColor = [UIColor whiteColor];
-    [self.refreshControl addTarget:self action:@selector(refreshData:) forControlEvents:UIControlEventValueChanged];
-    tableViewController.refreshControl = self.refreshControl;
 
 	[[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
     [[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
 
 
-	[self.topToolbar addBottomBorderWithHeight:0.3f andColor:[UIColor colorWithRed:0.325f green:0.255f blue:0.318f alpha:1.000]];
 
 }
 
