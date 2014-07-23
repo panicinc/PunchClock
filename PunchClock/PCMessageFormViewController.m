@@ -30,7 +30,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
+	[self setSendButtonEnabled:NO];
 	NSString *message = textField.text;
 
 	DDLogInfo(@"Sending '%@' to all who are In", message);
@@ -56,9 +56,11 @@
 		[self.messageTextField resignFirstResponder];
 		[self mz_dismissFormSheetControllerAnimated:YES completionHandler:nil];
 
+		[self setSendButtonEnabled:NO];
+
     } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
 		DDLogError(@"Status update failed: %@", error.localizedDescription);
-
+		[self setSendButtonEnabled:YES];
 		UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Message send failed. 😭"
 														   message:nil
 														  delegate:self
@@ -74,6 +76,12 @@
 
 	return YES;
 
+}
+
+- (void)setSendButtonEnabled:(BOOL)enabled
+{
+	self.sendButton.enabled = enabled;
+	self.sendButton.title = enabled ? @"Send" : @"Sending..";
 }
 
 - (void)viewDidAppear:(BOOL)animated
