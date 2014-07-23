@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Panic Inc. All rights reserved.
 //
 
+#import "PCBackend.h"
 #import "PCMessageFormViewController.h"
-#import <AFNetworking/AFNetworking.h>
 
 @interface PCMessageFormViewController() <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sendButton;
@@ -38,41 +38,24 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:@"username"];
 
-	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
-	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
+	id<PCBackend> backend = [PCBackend sharedBackend];
+	[backend sendMessage:message
+			fromUsername:username
+				 success:^(id responseObject) {
+					 DDLogDebug(@"Response: %@", responseObject);
+					 [self.messageTextField resignFirstResponder];
+					 [self mz_dismissFormSheetControllerAnimated:YES completionHandler:nil];
+				 }
+				 failure:^(NSError *error) {
+					 DDLogError(@"Status update failed: %@", error.localizedDescription);
 
-	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:[NSString stringWithFormat:@"%@/message/in", PCbaseURL]
-																	 parameters:@{@"message": message,
-																				  @"name": username}
-																		  error:nil];
-
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
-
-		DDLogDebug(@"Response: %@", responseObject);
-		[self.messageTextField resignFirstResponder];
-		[self mz_dismissFormSheetControllerAnimated:YES completionHandler:nil];
-
-		[self setSendButtonEnabled:NO];
-
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
-		DDLogError(@"Status update failed: %@", error.localizedDescription);
-		[self setSendButtonEnabled:YES];
-		UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Message send failed. 😭"
-														   message:nil
-														  delegate:self
-												 cancelButtonTitle:@"OK"
-												 otherButtonTitles:nil];
-		[theAlert show];
-
-
-
-    }];
-
-    [operation start];
+					 UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Message send failed. 😭"
+																		message:nil
+																	   delegate:self
+															  cancelButtonTitle:@"OK"
+															  otherButtonTitles:nil];
+					 [theAlert show];
+				 }];
 
 	return YES;
 

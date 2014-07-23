@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Panic Inc. All rights reserved.
 //
 
+#import "PCBackend.h"
 #import "PCStatusTableViewController.h"
 #import "PCStatusTableDataSource.h"
-#import <AFNetworking/AFNetworking.h>
 #import <MZFormSheetController/MZFormSheetController.h>
 #import <MZFormSheetController/MZFormSheetSegue.h>
 #import "PCMessageFormViewController.h"
@@ -76,41 +76,35 @@
 	NSString *name = nameLabel.text;
 
 	// Send the command
-	NSString *action = sender.selected ? @"unwatch" : @"watch";
-
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:@"username"];
 
-	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
-	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
-	
-	NSString *urlString = [[NSString stringWithFormat:@"%@/%@/%@", PCbaseURL, action, name] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:urlString
-																	 parameters:@{@"name": username}
-																		  error:nil];
-
-
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
-
-        NSDictionary *response = (NSDictionary *)responseObject;
+	void (^success)(id) = ^(id responseObject) {
+		NSDictionary *response = (NSDictionary *)responseObject;
 		DDLogDebug(@"Watch update response: %@", response);
 
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusUpdated" object:nil]];
+	};
 
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
+	void (^failure)(id) = ^(NSError *error) {
 		DDLogError(@"Watch update failed: %@", error.localizedDescription);
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusUpdated" object:nil]];
+	};
 
-    }];
+	id<PCBackend> backend = [PCBackend sharedBackend];
 
-    [operation start];
+	if (sender.selected) {
+		[backend unwatchUser:name
+					username:username
+					 success:success
+					 failure:failure];
 
-
+	} else {
+		[backend watchUser:name
+				  username:username
+				   success:success
+				   failure:failure];
+	}
 }
 
 - (void)viewDidLoad
