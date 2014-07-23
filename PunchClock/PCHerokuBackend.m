@@ -167,7 +167,7 @@ placeholderImage:(UIImage *)placeholderImage
 	[imageView.layer setCornerRadius:imageView.frame.size.width / 2];
 	[imageView setClipsToBounds:YES];
 	[imageView setImageWithURLRequest:URLRequest
-					 placeholderImage:[UIImage imageNamed:@"unknown"]
+					 placeholderImage:placeholderImage
 							  success:nil
 							  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
 								  NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", response, error];
