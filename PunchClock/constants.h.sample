@@ -4,6 +4,14 @@
 #define PCbaseURL @"https://your-punchclock.herokuapp.com"
 #endif
 
+// @"PCHerokuBackend" for Heroku, @"PCCloudKitBackend" for CloudKit.
+// CLoudKit support is experimental and should be used for development only.
+#define backendClass @"PCCloudKitBackend"
+
+// @"PCZeroPushService" for ZeroPush, @"PCCloudKitPushService" for CloudKit.
+// CLoudKit support is experimental and should be used for development only.
+#define pushServiceClass @"PCCloudKitPushService"
+
 #define backendUsername @"username"
 #define backendPassword @"password"
 
