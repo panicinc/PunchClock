@@ -254,74 +254,9 @@
 
 - (void)updateLocationStatus
 {
-	[self updateWithStatus:self.locationStatus withBeacon:self.closestBeacon];
-}
+	self.lastNotificationDate = [NSDate date];
 
-- (void)updateWithStatus:(NSString *)status withBeacon:(CLBeacon *)beacon
-{
-	dispatch_group_enter(self.dispatchGroup);
-
-	BOOL isInBackground = NO;
-	isInBackground = [UIApplication sharedApplication].applicationState == UIApplicationStateBackground;
-
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *username = [defaults stringForKey:@"username"];
-	NSString *push_id = [defaults stringForKey:@"push_id"];
-
-	if ([username isEqualToString:@""]) {
-		DDLogError(@"missing username, doing nothing");
-		return;
-	}
-
-	DDLogInfo(@"Sending update for %@:%@ in background:%i.", username, status, isInBackground);
-
-	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
-	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
-
-	NSNumber *beacon_minor = beacon.minor;
-
-	if (!beacon_minor) {
-		beacon_minor = @0;
-	}
-
-	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:[NSString stringWithFormat:@"%@/status/update", PCbaseURL]
-																	 parameters:@{@"status": status,
-																				  @"name": username,
-																				  @"push_id": push_id,
-																				  @"beacon_minor": beacon_minor}
-																		  error:nil];
-	request.timeoutInterval = 5;
-
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
-
-		DDLogDebug(@"Response: %@", responseObject);
-		NSNumber *status_changed = responseObject[@"status_changed"];
-
-		if (!isInBackground && status_changed.boolValue) {
-			NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
-			[[NSNotificationCenter defaultCenter] postNotification:n];
-		}
-		self.lastNotificationDate = [NSDate date];
-
-		dispatch_group_leave(self.dispatchGroup);
-
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
-		DDLogError(@"Status update failed: %@", error.localizedDescription);
-		dispatch_group_leave(self.dispatchGroup);
-
-    }];
-
-	[operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
-		// Handle iOS shutting you down (possibly make a note of where you
-		// stopped so you can resume later)
-	}];
-
-    [operation start];
-	
+	[self.delegate updateWithStatus:self.locationStatus withBeacon:self.closestBeacon];
 }
 
 #pragma mark - App State
@@ -519,7 +454,7 @@
 		if (beacon.rssi > strongestSignal && beacon.rssi != 0) {
 			self.closestBeacon = beacon;
 		}
-		DDLogVerbose(@"Ranging Beacon #%@ Region: %@ Distance: %@ Signal: %ld", beacon.minor, region.identifier, self.beaconDistance, (long) beacon.rssi);
+		DDLogVerbose(@"Ranging Beacon #%@/%@ Region: %@ Distance: %@ Signal: %ld", beacon.major, beacon.minor, region.identifier, self.beaconDistance, (long) beacon.rssi);
 
 	}
 
@@ -533,7 +468,7 @@
 		self.beaconDistance = @"Far";
 	}
 
-	DDLogVerbose(@"Closest Beacon #%@ Distance: %@ Signal: %ld", self.closestBeacon.minor, self.beaconDistance, (long) self.closestBeacon.rssi);
+	DDLogVerbose(@"Closest Beacon #%@/%@ Distance: %@ Signal: %ld", self.closestBeacon.major, self.closestBeacon.minor, self.beaconDistance, (long) self.closestBeacon.rssi);
 	self.inRange = YES;
 
 }

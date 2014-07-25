@@ -83,7 +83,7 @@
 			CLBeacon *newValue = (CLBeacon *)[change objectForKey:NSKeyValueChangeNewKey];
 
 			if (![newValue isEqual:[NSNull null]]) {
-				self.closestBeaconLabel.text = [NSString stringWithFormat:@"%@", newValue.minor];
+				self.closestBeaconLabel.text = [NSString stringWithFormat:@"%@/%@", newValue.major, newValue.minor];
 				self.beaconSignalStrengthLabel.text = [NSString stringWithFormat:@"%li", (long)newValue.rssi];
 			} else {
 				self.closestBeaconLabel.text = @"?";

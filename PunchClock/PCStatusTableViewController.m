@@ -12,8 +12,11 @@
 #import <MZFormSheetController/MZFormSheetController.h>
 #import <MZFormSheetController/MZFormSheetSegue.h>
 #import "PCMessageFormViewController.h"
+#import "PCLocationManager.h"
 
-@interface PCStatusTableViewController () <MZFormSheetBackgroundWindowDelegate>
+@import CoreLocation;
+
+@interface PCStatusTableViewController () <MZFormSheetBackgroundWindowDelegate, PCLocationManagerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *messageButton;
 
@@ -114,6 +117,72 @@
 
 }
 
+- (void)updateWithStatus:(NSString *)status withBeacon:(CLBeacon *)beacon
+{
+	dispatch_group_enter([[PCLocationManager sharedLocationManager] dispatchGroup]);
+
+	BOOL isInBackground = NO;
+	isInBackground = [UIApplication sharedApplication].applicationState == UIApplicationStateBackground;
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *username = [defaults stringForKey:@"username"];
+	NSString *push_id = [defaults stringForKey:@"push_id"];
+
+	if ([username isEqualToString:@""]) {
+		DDLogError(@"missing username, doing nothing");
+		return;
+	}
+
+	DDLogInfo(@"Sending update for %@:%@ in background:%i.", username, status, isInBackground);
+
+	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
+	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
+
+	NSNumber *beacon_minor = beacon.minor;
+
+	if (!beacon_minor) {
+		beacon_minor = @0;
+	}
+
+	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
+																	  URLString:[NSString stringWithFormat:@"%@/status/update", PCbaseURL]
+																	 parameters:@{@"status": status,
+																				  @"name": username,
+																				  @"push_id": push_id,
+																				  @"beacon_minor": beacon_minor}
+																		  error:nil];
+	request.timeoutInterval = 5;
+
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
+
+		DDLogDebug(@"Response: %@", responseObject);
+		NSNumber *status_changed = responseObject[@"status_changed"];
+
+		if (!isInBackground && status_changed.boolValue) {
+			NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
+			[[NSNotificationCenter defaultCenter] postNotification:n];
+		}
+
+		dispatch_group_leave([[PCLocationManager sharedLocationManager] dispatchGroup]);
+
+    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
+		DDLogError(@"Status update failed: %@", error.localizedDescription);
+		dispatch_group_leave([[PCLocationManager sharedLocationManager] dispatchGroup]);
+
+    }];
+
+	[operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
+		// Handle iOS shutting you down (possibly make a note of where you
+		// stopped so you can resume later)
+	}];
+
+    [operation start];
+	
+}
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -145,7 +214,7 @@
     [[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
 
-
+	[[PCLocationManager sharedLocationManager] setDelegate:self];
 
 }
 

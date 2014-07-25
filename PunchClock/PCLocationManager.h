@@ -9,6 +9,12 @@
 @import Foundation;
 @import CoreLocation;
 
+@protocol PCLocationManagerDelegate <NSObject>
+
+- (void)updateWithStatus:(NSString *)status withBeacon:(CLBeacon *)beacon;
+
+@end
+
 @interface PCLocationManager : NSObject
 
 + (PCLocationManager *)sharedLocationManager;
@@ -25,6 +31,9 @@
 - (void)updateLocationStatus;
 - (BOOL)updateLocationStatusIfNeeded;
 
+
 @property dispatch_group_t dispatchGroup;
+
+@property (nonatomic, strong) id <PCLocationManagerDelegate> delegate;
 
 @end
