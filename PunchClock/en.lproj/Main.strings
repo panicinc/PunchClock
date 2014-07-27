@@ -1,0 +1,72 @@
+
+/* Class = "IBUILabel"; text = "Near Office"; ObjectID = "04Z-ab-ktr"; */
+"04Z-ab-ktr.text" = "Near Office";
+
+/* Class = "IBUILabel"; text = "Closest Beacon"; ObjectID = "28N-XG-zgd"; */
+"28N-XG-zgd.text" = "Closest Beacon";
+
+/* Class = "IBUILabel"; text = "Updated"; ObjectID = "2Ss-FL-6Vy"; */
+"2Ss-FL-6Vy.text" = "Updated";
+
+/* Class = "IBUILabel"; text = "Ranging"; ObjectID = "2dg-xL-eRt"; */
+"2dg-xL-eRt.text" = "Ranging";
+
+/* Class = "IBUIViewController"; title = "Message"; ObjectID = "2wa-Mo-zWR"; */
+"2wa-Mo-zWR.title" = "Message";
+
+/* Class = "IBUIBarButtonItem"; title = "Send"; ObjectID = "4q3-gz-lfU"; */
+"4q3-gz-lfU.title" = "Send";
+
+/* Class = "IBUILabel"; text = "Signal Strength"; ObjectID = "7TD-Gt-ASO"; */
+"7TD-Gt-ASO.text" = "Signal Strength";
+
+/* Class = "IBUILabel"; text = "You are"; ObjectID = "7Y5-Bm-yvM"; */
+"7Y5-Bm-yvM.text" = "You are";
+
+/* Class = "IBUINavigationItem"; title = "Message"; ObjectID = "9aB-g5-v1y"; */
+"9aB-g5-v1y.title" = "Message";
+
+/* Class = "IBUILabel"; text = "Location Status"; ObjectID = "AAz-bt-tiK"; */
+"AAz-bt-tiK.text" = "Location Status";
+
+/* Class = "IBUITabBarItem"; title = "Messages"; ObjectID = "B9u-P7-a8e"; */
+"B9u-P7-a8e.title" = "Messages";
+
+/* Class = "IBUILabel"; text = "In Range of Beacon"; ObjectID = "Gww-9V-TVA"; */
+"Gww-9V-TVA.text" = "In Range of Beacon";
+
+/* Class = "IBUILabel"; text = "Version"; ObjectID = "HAC-9K-me5"; */
+"HAC-9K-me5.text" = "Version";
+
+/* Class = "IBUITabBarItem"; title = "Information"; ObjectID = "MSm-hZ-aum"; */
+"MSm-hZ-aum.title" = "Information";
+
+/* Class = "IBUILabel"; text = "Latitude"; ObjectID = "NQj-Nb-vGV"; */
+"NQj-Nb-vGV.text" = "Latitude";
+
+/* Class = "IBUITextField"; placeholder = "What's your name?"; ObjectID = "S10-N5-sxh"; */
+"S10-N5-sxh.placeholder" = "What's your name?";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "VzU-HB-M6W"; */
+"VzU-HB-M6W.title" = "Cancel";
+
+/* Class = "IBUILabel"; text = "Loading…"; ObjectID = "Zxp-S6-jHC"; */
+"Zxp-S6-jHC.text" = "Loading…";
+
+/* Class = "IBUILabel"; text = "Distance to Beacon"; ObjectID = "aZK-2a-DS0"; */
+"aZK-2a-DS0.text" = "Distance to Beacon";
+
+/* Class = "IBUILabel"; text = "Longitude"; ObjectID = "jfH-QZ-eZl"; */
+"jfH-QZ-eZl.text" = "Longitude";
+
+/* Class = "IBUILabel"; text = "In"; ObjectID = "jfX-z3-HQd"; */
+"jfX-z3-HQd.text" = "In";
+
+/* Class = "IBUITabBarItem"; title = "Team"; ObjectID = "mcx-Zy-MVd"; */
+"mcx-Zy-MVd.title" = "Team";
+
+/* Class = "IBUILabel"; text = "Distance to Office"; ObjectID = "r59-HM-X2C"; */
+"r59-HM-X2C.text" = "Distance to Office";
+
+/* Class = "IBUILabel"; text = "Loading…"; ObjectID = "wle-JZ-zpa"; */
+"wle-JZ-zpa.text" = "Loading…";

@@ -48,17 +48,17 @@
 	  if ([keyPath isEqualToString:@"nearOffice"]) {
 
 			BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-			self.inOfficeLabel.text = newValue ? @"Yes" : @"No";
+			self.inOfficeLabel.text = newValue ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 
 		} else if ([keyPath isEqualToString:@"inRange"]) {
 
 			BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-			self.inRangeLabel.text = newValue ? @"Yes" : @"No";
+			self.inRangeLabel.text = newValue ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 
 		} else if ([keyPath isEqualToString:@"isRanging"]) {
 			
 			BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-			self.isRangingLabel.text = newValue ? @"Yes" : @"No";
+			self.isRangingLabel.text = newValue ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			
 		} else if ([keyPath isEqualToString:@"lastNotificationDate"]) {
 			

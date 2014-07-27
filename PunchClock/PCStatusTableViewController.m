@@ -61,8 +61,9 @@
 	[self.tableView reloadData];
 //	self.tabBarItem.badgeValue = [count stringValue];
 
-	NSString *countedPeopleString = [count integerValue] == 1 ? @"Person" : @"People";
-	self.toolbarTitle.text = [NSString stringWithFormat:@"%@ %@", count, countedPeopleString];
+	// TODO: Localization Dictionary
+	self.toolbarTitle.text = [NSString localizedStringWithFormat:NSLocalizedString(@"%d People", nil),
+							  [count unsignedIntValue]];
 
 	self.messageButton.enabled = ([count compare:@0] == NSOrderedDescending);
 
