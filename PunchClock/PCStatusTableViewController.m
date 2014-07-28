@@ -117,6 +117,8 @@
 
 }
 
+#pragma  mark - PCLocationManagerDelegate
+
 - (void)updateWithStatus:(NSString *)status withBeacon:(CLBeacon *)beacon
 {
 	dispatch_group_enter([[PCLocationManager sharedLocationManager] dispatchGroup]);
