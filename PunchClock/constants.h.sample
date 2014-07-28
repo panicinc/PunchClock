@@ -1,6 +1,8 @@
 #ifdef CONFIGURATION_Debug
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #define PCbaseURL @"http://machine.local:5000"
 #else
+static const int ddLogLevel = LOG_LEVEL_WARN;
 #define PCbaseURL @"https://your-punchclock.herokuapp.com"
 #endif
 
