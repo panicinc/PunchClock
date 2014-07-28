@@ -61,10 +61,10 @@
     } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
 		DDLogError(@"Status update failed: %@", error.localizedDescription);
 		[self setSendButtonEnabled:YES];
-		UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Message send failed. 😭"
+		UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Message send failed. 😭", nil)
 														   message:nil
 														  delegate:self
-												 cancelButtonTitle:@"OK"
+												 cancelButtonTitle:NSLocalizedString(@"OK", nil)
 												 otherButtonTitles:nil];
 		[theAlert show];
 
@@ -81,7 +81,7 @@
 - (void)setSendButtonEnabled:(BOOL)enabled
 {
 	self.sendButton.enabled = enabled;
-	self.sendButton.title = enabled ? @"Send" : @"Sending..";
+	self.sendButton.title = enabled ? NSLocalizedString(@"Send", nil) : NSLocalizedString(@"Sending…", nil);
 }
 
 - (void)viewDidAppear:(BOOL)animated

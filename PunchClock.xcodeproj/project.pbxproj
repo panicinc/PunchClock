@@ -35,6 +35,8 @@
 		1AF7D58518501169006B1FA4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D58418501169006B1FA4 /* CoreText.framework */; };
 		1AF7D58718501195006B1FA4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D58618501195006B1FA4 /* Security.framework */; };
 		1AF7D5891850119F006B1FA4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */; };
+		308A9EBE19844B60002BBC50 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 308A9EBC19844B60002BBC50 /* Localizable.strings */; };
+		308A9EC119844BAA002BBC50 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 308A9EBF19844BAA002BBC50 /* Localizable.stringsdict */; };
 		D40341EAF4384A82B93FCE57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE64CEC02D345349586E792 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,9 @@
 		1AF7D58418501169006B1FA4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1AF7D58618501195006B1FA4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		308A9EBB19841ABB002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		308A9EBD19844B60002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		308A9EC019844BAA002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		3EE64CEC02D345349586E792 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +199,8 @@
 		1A791DB718442884000943E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				308A9EBC19844B60002BBC50 /* Localizable.strings */,
+				308A9EBF19844BAA002BBC50 /* Localizable.stringsdict */,
 				1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */,
 				1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */,
 				8DB6B02B2DC5489086E7656C /* Pods.xcconfig */,
@@ -338,8 +345,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A791DC918442884000943E4 /* Images.xcassets in Resources */,
+				308A9EBE19844B60002BBC50 /* Localizable.strings in Resources */,
 				1A8439A718FC640A00F3AC85 /* status.caf in Resources */,
 				1A791DBB18442884000943E4 /* InfoPlist.strings in Resources */,
+				308A9EC119844BAA002BBC50 /* Localizable.stringsdict in Resources */,
 				1A791DC418442884000943E4 /* Main.storyboard in Resources */,
 				1A8439A818FC640A00F3AC85 /* message.caf in Resources */,
 			);
@@ -432,8 +441,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				1A791DC318442884000943E4 /* Base */,
+				308A9EBB19841ABB002BBC50 /* en */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		308A9EBC19844B60002BBC50 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				308A9EBD19844B60002BBC50 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		308A9EBF19844BAA002BBC50 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				308A9EC019844BAA002BBC50 /* en */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -111,19 +111,19 @@
 	}
 
 	if (![CLLocationManager locationServicesEnabled]) {
-		errorMsg = @"Location Services Unavailable";
+		errorMsg = NSLocalizedString(@"Location Services Unavailable", nil);
 
 	} else {
 
 		if (![CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]]) {
-			errorMsg = @"GeoFence Monitoring Unavailable";
+			errorMsg = NSLocalizedString(@"GeoFence Monitoring Unavailable", nil);
 
 		} else {
 
 			if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
 					[CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
 				
-				errorMsg = @"Location Tracking Unavailable";
+				errorMsg = NSLocalizedString(@"Location Tracking Unavailable", nil);
 			} else {
 				
 				// We have the services we need to get started
@@ -461,11 +461,11 @@
 	if (self.closestBeacon.proximity == CLProximityUnknown) {
 		self.beaconDistance = @"?";
 	} else if (self.closestBeacon.proximity == CLProximityImmediate) {
-		self.beaconDistance = @"Immediate";
+		self.beaconDistance = NSLocalizedString(@"Immediate", nil);
 	} else if (self.closestBeacon.proximity == CLProximityNear) {
-		self.beaconDistance = @"Near";
+		self.beaconDistance = NSLocalizedString(@"Near", nil);
 	} else if (self.closestBeacon.proximity == CLProximityFar) {
-		self.beaconDistance = @"Far";
+		self.beaconDistance = NSLocalizedString(@"Far", nil);
 	}
 
 	DDLogVerbose(@"Closest Beacon #%@/%@ Distance: %@ Signal: %ld", self.closestBeacon.major, self.closestBeacon.minor, self.beaconDistance, (long) self.closestBeacon.rssi);
