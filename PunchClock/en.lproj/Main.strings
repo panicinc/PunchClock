@@ -38,6 +38,9 @@
 /* Class = "IBUILabel"; text = "Version"; ObjectID = "HAC-9K-me5"; */
 "HAC-9K-me5.text" = "Version";
 
+/* Class = "IBUILabel"; text = "In"; ObjectID = "La6-gx-akJ"; */
+"La6-gx-akJ.text" = "In";
+
 /* Class = "IBUITabBarItem"; title = "Information"; ObjectID = "MSm-hZ-aum"; */
 "MSm-hZ-aum.title" = "Information";
 
@@ -56,6 +59,9 @@
 /* Class = "IBUILabel"; text = "Distance to Beacon"; ObjectID = "aZK-2a-DS0"; */
 "aZK-2a-DS0.text" = "Distance to Beacon";
 
+/* Class = "IBUILabel"; text = "00000"; ObjectID = "bQc-Px-AUM"; */
+"bQc-Px-AUM.text" = "00000";
+
 /* Class = "IBUILabel"; text = "Longitude"; ObjectID = "jfH-QZ-eZl"; */
 "jfH-QZ-eZl.text" = "Longitude";
 
@@ -67,6 +73,9 @@
 
 /* Class = "IBUILabel"; text = "Distance to Office"; ObjectID = "r59-HM-X2C"; */
 "r59-HM-X2C.text" = "Distance to Office";
+
+/* Class = "IBUIButton"; accessibilityLabel = "Compose Message"; ObjectID = "swj-nH-qDn"; */
+"swj-nH-qDn.accessibilityLabel" = "Compose Message";
 
 /* Class = "IBUILabel"; text = "Loading…"; ObjectID = "wle-JZ-zpa"; */
 "wle-JZ-zpa.text" = "Loading…";
