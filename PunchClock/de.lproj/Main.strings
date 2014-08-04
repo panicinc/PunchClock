@@ -1,0 +1,123 @@
+
+/* Class = "IBUILabel"; text = "Near Office"; ObjectID = "04Z-ab-ktr"; */
+"04Z-ab-ktr.text" = "Nahe dem Büro";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "0gm-QO-YkM"; */
+"0gm-QO-YkM.text" = "?";
+
+/* Class = "IBUILabel"; text = "21 Jul 12:21am"; ObjectID = "12t-k0-WXK"; */
+"12t-k0-WXK.text" = "21 Jul 12:21am";
+
+/* Class = "IBUILabel"; text = "Closest Beacon"; ObjectID = "28N-XG-zgd"; */
+"28N-XG-zgd.text" = "Nächstgelegener Beacon";
+
+/* Class = "IBUILabel"; text = "Updated"; ObjectID = "2Ss-FL-6Vy"; */
+"2Ss-FL-6Vy.text" = "Aktualisiert";
+
+/* Class = "IBUILabel"; text = "Ranging"; ObjectID = "2dg-xL-eRt"; */
+"2dg-xL-eRt.text" = "In Reichweite";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "2jL-wh-UUH"; */
+"2jL-wh-UUH.text" = "?";
+
+/* Class = "IBUIViewController"; title = "Message"; ObjectID = "2wa-Mo-zWR"; */
+"2wa-Mo-zWR.title" = "Nachricht";
+
+/* Class = "IBUIBarButtonItem"; title = "Send"; ObjectID = "4q3-gz-lfU"; */
+"4q3-gz-lfU.title" = "Senden";
+
+/* Class = "IBUILabel"; text = "Signal Strength"; ObjectID = "7TD-Gt-ASO"; */
+"7TD-Gt-ASO.text" = "Signalstärke";
+
+/* Class = "IBUILabel"; text = "You are"; ObjectID = "7Y5-Bm-yvM"; */
+"7Y5-Bm-yvM.text" = "Du bist";
+
+/* Class = "IBUINavigationItem"; title = "Message"; ObjectID = "9aB-g5-v1y"; */
+"9aB-g5-v1y.title" = "Nachricht";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "9k0-I3-b4u"; */
+"9k0-I3-b4u.text" = "?";
+
+/* Class = "IBUILabel"; text = "Location Status"; ObjectID = "AAz-bt-tiK"; */
+"AAz-bt-tiK.text" = "Ortungsstatus";
+
+/* Class = "IBUITabBarItem"; title = "Messages"; ObjectID = "B9u-P7-a8e"; */
+"B9u-P7-a8e.title" = "Nachrichten";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "CND-b9-aGK"; */
+"CND-b9-aGK.text" = "?";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "Frl-cV-UAO"; */
+"Frl-cV-UAO.text" = "?";
+
+/* Class = "IBUILabel"; text = "In Range of Beacon"; ObjectID = "Gww-9V-TVA"; */
+"Gww-9V-TVA.text" = "In Reichweite des Beacon";
+
+/* Class = "IBUILabel"; text = "Version"; ObjectID = "HAC-9K-me5"; */
+"HAC-9K-me5.text" = "Version";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "JBD-cD-EU5"; */
+"JBD-cD-EU5.text" = "?";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "Jk3-8R-at9"; */
+"Jk3-8R-at9.text" = "?";
+
+/* Class = "IBUILabel"; text = "In"; ObjectID = "La6-gx-akJ"; */
+"La6-gx-akJ.text" = "Anwesend";
+
+/* Class = "IBUITabBarItem"; title = "Information"; ObjectID = "MSm-hZ-aum"; */
+"MSm-hZ-aum.title" = "Informationen";
+
+/* Class = "IBUILabel"; text = "Latitude"; ObjectID = "NQj-Nb-vGV"; */
+"NQj-Nb-vGV.text" = "Breitengrad";
+
+/* Class = "IBUILabel"; text = "James"; ObjectID = "R8c-oc-ap5"; */
+"R8c-oc-ap5.text" = "James";
+
+/* Class = "IBUITextField"; placeholder = "What's your name?"; ObjectID = "S10-N5-sxh"; */
+"S10-N5-sxh.placeholder" = "Wie lautet dein Name?";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "VzU-HB-M6W"; */
+"VzU-HB-M6W.title" = "Abbrechen";
+
+/* Class = "IBUILabel"; text = "???"; ObjectID = "XJ4-Za-02Q"; */
+"XJ4-Za-02Q.text" = "???";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "Ya8-vg-E3o"; */
+"Ya8-vg-E3o.text" = "?";
+
+/* Class = "IBUILabel"; text = "Loading…"; ObjectID = "Zxp-S6-jHC"; */
+"Zxp-S6-jHC.text" = "Laden…";
+
+/* Class = "IBUILabel"; text = "Distance to Beacon"; ObjectID = "aZK-2a-DS0"; */
+"aZK-2a-DS0.text" = "Entfernung zum Beacon";
+
+/* Class = "IBUILabel"; text = "00000"; ObjectID = "bQc-Px-AUM"; */
+"bQc-Px-AUM.text" = "00000";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "hTf-cn-LUE"; */
+"hTf-cn-LUE.text" = "?";
+
+/* Class = "IBUILabel"; text = "Longitude"; ObjectID = "jfH-QZ-eZl"; */
+"jfH-QZ-eZl.text" = "Längengrad";
+
+/* Class = "IBUILabel"; text = "In"; ObjectID = "jfX-z3-HQd"; */
+"jfX-z3-HQd.text" = "Anwesend";
+
+/* Class = "IBUITabBarItem"; title = "Team"; ObjectID = "mcx-Zy-MVd"; */
+"mcx-Zy-MVd.title" = "Team";
+
+/* Class = "IBUITextView"; text = "Hey peeps, I'm running a bit late but I'll be there at around 10."; ObjectID = "nTL-9Y-cRG"; */
+"nTL-9Y-cRG.text" = "Hey peeps, I'm running a bit late but I'll be there at around 10.";
+
+/* Class = "IBUILabel"; text = "James"; ObjectID = "qqh-Hk-V2C"; */
+"qqh-Hk-V2C.text" = "James";
+
+/* Class = "IBUILabel"; text = "Distance to Office"; ObjectID = "r59-HM-X2C"; */
+"r59-HM-X2C.text" = "Entfernung zum Büro";
+
+/* Class = "IBUILabel"; text = "?"; ObjectID = "rxr-YY-Fpi"; */
+"rxr-YY-Fpi.text" = "?";
+
+/* Class = "IBUILabel"; text = "Loading…"; ObjectID = "wle-JZ-zpa"; */
+"wle-JZ-zpa.text" = "Laden…";

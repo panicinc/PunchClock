@@ -99,6 +99,10 @@
 		308A9EBD19844B60002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		308A9EC019844BAA002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		3EE64CEC02D345349586E792 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E23B8A8198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		5E23B8A9198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E23B8AA198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		5E23B8AB198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -328,6 +332,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 1A791DA418442884000943E4;
 			productRefGroup = 1A791DAE18442884000943E4 /* Products */;
@@ -433,6 +438,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1A791DBA18442884000943E4 /* en */,
+				5E23B8AB198FFB150068CDEC /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 			children = (
 				1A791DC318442884000943E4 /* Base */,
 				308A9EBB19841ABB002BBC50 /* en */,
+				5E23B8A8198FFB150068CDEC /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -450,6 +457,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				308A9EBD19844B60002BBC50 /* en */,
+				5E23B8A9198FFB150068CDEC /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -458,6 +466,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				308A9EC019844BAA002BBC50 /* en */,
+				5E23B8AA198FFB150068CDEC /* de */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";

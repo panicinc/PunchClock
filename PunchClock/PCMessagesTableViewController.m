@@ -48,13 +48,13 @@ static NSString *cellIdentifier = @"MessageTableCell";
 
         self.messages = (NSArray *)responseObject;
 		[self.tableView reloadData];
-		self.toolbarTitle.text = @"Messages";
+		self.toolbarTitle.text = NSLocalizedString(@"Messages", nil);
 		[self.refreshControl endRefreshing];
 
     } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
 		DDLogError(@"Fetching Messages failed: %@", error.localizedDescription);
 		[self.refreshControl endRefreshing];
-		self.toolbarTitle.text = @"Messages";
+		self.toolbarTitle.text = NSLocalizedString(@"Messages", nil);
     }];
 
     [operation start];
