@@ -448,14 +448,16 @@
 
 	DDLogVerbose(@"%ld Beacons found", (long) beacons.count);
 
-	NSInteger strongestSignal = -100;
+	CLLocationAccuracy closestSignal = 100;
 
 	for (CLBeacon *beacon in beacons) {
 
-		if (beacon.rssi > strongestSignal && beacon.rssi != 0) {
+		DDLogVerbose(@"Beacon #%@/%@ Distance: %i Signal: %ld: Accuracy: %f", beacon.major, beacon.minor, self.closestBeacon.proximity, (long) beacon.rssi, beacon.accuracy);
+
+		if (beacon.accuracy < closestSignal && beacon.accuracy > 0) {
+			closestSignal = beacon.accuracy;
 			self.closestBeacon = beacon;
 		}
-		DDLogVerbose(@"Ranging Beacon #%@/%@ Region: %@ Distance: %@ Signal: %ld", beacon.major, beacon.minor, region.identifier, self.beaconDistance, (long) beacon.rssi);
 
 	}
 
