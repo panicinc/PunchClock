@@ -19,8 +19,8 @@
 @property (nonatomic, strong) NSDate *lastExitDate;
 @property (nonatomic, strong) NSDate *lastEntryDate;
 @property (nonatomic, strong) NSDate *lastNotificationDate;
-@property (nonatomic, strong) NSString *beaconDistance;
-@property (nonatomic, strong) NSString *officeDistance;
+@property (nonatomic, copy) NSString *beaconDistance;
+@property (nonatomic, copy) NSString *officeDistance;
 @property (nonatomic, strong) CLBeacon *closestBeacon;
 @property (nonatomic, strong) CLLocation *location;
 
@@ -65,17 +65,17 @@
 
 	if (self) {
 
-		self.nearOffice = NO;
-		self.inRange =  NO;
-		self.trackLocationNotified = NO;
-		self.setupCompleted = NO;
-		self.beaconDistance = @"?";
-		self.officeDistance = @"?";
-		self.officeDistanceValue = 1000;
-		self.geoFenceEnabled = NO;
-		self.closestBeacon = [[CLBeacon alloc] init];
+		_nearOffice = NO;
+		_inRange =  NO;
+		_trackLocationNotified = NO;
+		_setupCompleted = NO;
+		_beaconDistance = @"?";
+		_officeDistance = @"?";
+		_officeDistanceValue = 1000;
+		_geoFenceEnabled = NO;
+		_closestBeacon = [[CLBeacon alloc] init];
 
-		self.officeLocation = [[CLLocation alloc] initWithLatitude:geoFenceLat longitude:geoFenceLong];
+		_officeLocation = [[CLLocation alloc] initWithLatitude:geoFenceLat longitude:geoFenceLong];
 
 		[self setupManager];
 
@@ -83,7 +83,7 @@
 
 		[defaults addObserver:self forKeyPath:@"username" options:NSKeyValueObservingOptionNew context:NULL];
 
-		self.dispatchGroup = dispatch_group_create();
+		_dispatchGroup = dispatch_group_create();
 
 		[self updateLocationStatusOnTimer];
 
@@ -94,6 +94,7 @@
 
 - (void)dealloc
 {
+	self.locationManager.delegate = nil;
 	[self removeObserver:self forKeyPath:@"username"];
 }
 
@@ -533,19 +534,31 @@
 
 	if ([region.identifier isEqualToString:officeBeaconIdentifier]) {
 
-		if (state == CLRegionStateInside) {
-			self.inRange = YES;
-		} else if (state == CLRegionStateOutside) {
-			self.inRange = NO;
+		switch (state) {
+			case CLRegionStateInside:
+				self.inRange = YES;
+
+				break;
+			case CLRegionStateOutside:
+			case CLRegionStateUnknown:
+			default:
+				self.inRange = NO;
 		}
+
 
 	} else if ([region.identifier isEqualToString:officeIdentifier]) {
 
-		if (state == CLRegionStateInside) {
-			self.nearOffice = YES;
-		} else if (state == CLRegionStateOutside) {
-			self.nearOffice = NO;
+		switch (state) {
+			case CLRegionStateInside:
+				self.nearOffice = YES;
+
+				break;
+			case CLRegionStateOutside:
+			case CLRegionStateUnknown:
+			default:
+				self.nearOffice = NO;
 		}
+
 	}
 
 }

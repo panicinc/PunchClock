@@ -34,6 +34,6 @@
 
 @property dispatch_group_t dispatchGroup;
 
-@property (nonatomic, strong) id <PCLocationManagerDelegate> delegate;
+@property (nonatomic, weak) id <PCLocationManagerDelegate> delegate;
 
 @end
