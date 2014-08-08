@@ -3,7 +3,7 @@ PunchClock
 
 PunchClock is an in/out tracking app for iOS 7+ that uses iBeacon and Geofencing.
 
-![PunchClock Screenshot](http://panic-cdn.s3.amazonaws.com/punchclock/PunchClock%20UI.png)
+![PunchClock Screenshot](http://www.panic.com/blog/wp-content/uploads/2014/07/PunchClock.png)
 
 **PunchClock cannot operate on its own - It requires the [PunchClockServer](https://github.com/panicinc/PunchClockServer).**
 
