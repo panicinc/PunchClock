@@ -17,10 +17,10 @@
 
 	for (UIViewController *vc in self.viewControllers) {
 
-		if (vc == [self.viewControllers objectAtIndex:0]) {
+		if (vc == self.viewControllers[0]) {
 			vc.tabBarItem.selectedImage = [UIImage imageNamed:@"team-on"];
 			vc.tabBarItem.image = [[UIImage imageNamed:@"team"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-		} else if (vc == [self.viewControllers objectAtIndex:1]) {
+		} else if (vc == self.viewControllers[1]) {
 			vc.tabBarItem.selectedImage = [UIImage imageNamed:@"options-on"];
 			vc.tabBarItem.image = [[UIImage imageNamed:@"options"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 

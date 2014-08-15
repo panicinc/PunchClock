@@ -51,8 +51,8 @@
 
 	// Default Settings
 	NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:1];
-	[settings setObject:@"" forKey:@"username"];
-	[settings setObject:@"" forKey:@"push_id"];
+	settings[@"username"] = @"";
+	settings[@"push_id"] = @"";
 
 	[[NSUserDefaults standardUserDefaults] registerDefaults:settings];
 
@@ -60,13 +60,13 @@
 
 	self.locationManager = [PCLocationManager sharedLocationManager];
 
-	[application setStatusBarHidden:NO];
-	[application setStatusBarStyle:UIStatusBarStyleLightContent];
+	application.statusBarHidden = NO;
+	application.statusBarStyle = UIStatusBarStyleLightContent;
 
 	[application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
 	if (launchOptions != nil) {
-		NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+		NSDictionary *dictionary = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
 
 		if (dictionary != nil) {
 			DDLogInfo(@"Launched from push notification: %@", dictionary);
@@ -156,9 +156,9 @@
 	DDLogDebug(@"Push notification: %@", userInfo);
 
 	//if the notification doesn't say there is content available just return
-    NSDictionary *aps = [userInfo objectForKey:@"aps"];
+    NSDictionary *aps = userInfo[@"aps"];
 
-    if (![[aps objectForKey:@"content-available"] intValue]) {
+    if (![aps[@"content-available"] intValue]) {
         DDLogDebug(@"Updating Status List");
 
 		NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];

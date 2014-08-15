@@ -224,7 +224,7 @@
 
 - (void)updateLocationStatusOnTimer
 {
-	if (self.updateTimer.isValid) {
+	if ([self.updateTimer isValid]) {
 		// The timer is already running.
 		[self.updateTimer invalidate];
 		DDLogVerbose(@"status update timer reset");
@@ -441,7 +441,7 @@
 
 	self.bluetoothEnabled = YES;
 
-	if (beacons.count == 0) {
+	if ([beacons count] == 0) {
 		self.inRange = NO;
 		return;
 	}
@@ -449,10 +449,11 @@
 	DDLogVerbose(@"%ld Beacons found", (long) beacons.count);
 
 	CLLocationAccuracy closestSignal = 100;
+	CLBeacon *closestBeacon;
 
 	for (CLBeacon *beacon in beacons) {
 
-		DDLogVerbose(@"Beacon #%@/%@ Distance: %i Signal: %ld: Accuracy: %f", beacon.major, beacon.minor, self.closestBeacon.proximity, (long) beacon.rssi, beacon.accuracy);
+		DDLogVerbose(@"Beacon #%@/%@ Distance: %li Signal: %ld: Accuracy: %f", beacon.major, beacon.minor, (long)self.closestBeacon.proximity, (long) beacon.rssi, beacon.accuracy);
 
 		if (beacon.accuracy < closestSignal && beacon.accuracy > 0) {
 			closestSignal = beacon.accuracy;
@@ -460,6 +461,8 @@
 		}
 
 	}
+
+	self.closestBeacon = closestBeacon;
 
 	if (self.closestBeacon.proximity == CLProximityUnknown) {
 		self.beaconDistance = @"?";

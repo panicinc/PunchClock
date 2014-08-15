@@ -36,7 +36,7 @@
 {
 
 	[self.locationManager updateLocationStatus];
-	[[self tableView] reloadData];
+	[self.tableView reloadData];
 	[self.refreshControl endRefreshing];
 }
 
@@ -47,40 +47,40 @@
 
 	  if ([keyPath isEqualToString:@"nearOffice"]) {
 
-			BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+			BOOL newValue = [change[NSKeyValueChangeNewKey] boolValue];
 			self.inOfficeLabel.text = newValue ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 
 		} else if ([keyPath isEqualToString:@"inRange"]) {
 
-			BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+			BOOL newValue = [change[NSKeyValueChangeNewKey] boolValue];
 			self.inRangeLabel.text = newValue ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 
 		} else if ([keyPath isEqualToString:@"isRanging"]) {
 			
-			BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+			BOOL newValue = [change[NSKeyValueChangeNewKey] boolValue];
 			self.isRangingLabel.text = newValue ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			
 		} else if ([keyPath isEqualToString:@"lastNotificationDate"]) {
 			
-			NSDate *newValue = (NSDate *)[change objectForKey:NSKeyValueChangeNewKey];
+			NSDate *newValue = (NSDate *)change[NSKeyValueChangeNewKey];
 			NSString *localDate = [NSDateFormatter localizedStringFromDate:newValue dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
 			
 			self.lastUpdateLabel.text = localDate;
 			
 		} else if ([keyPath isEqualToString:@"beaconDistance"]) {
-			NSString *newValue = (NSString *)[change objectForKey:NSKeyValueChangeNewKey];
+			NSString *newValue = (NSString *)change[NSKeyValueChangeNewKey];
 			self.distanceLabel.text = newValue;
 
 		} else if ([keyPath isEqualToString:@"officeDistance"]) {
-			NSString *newValue = (NSString *)[change objectForKey:NSKeyValueChangeNewKey];
+			NSString *newValue = (NSString *)change[NSKeyValueChangeNewKey];
 			self.officeDistanceLabel.text = newValue;
 
 		} else if ([keyPath isEqualToString:@"locationStatus"]) {
-			NSString *newValue = (NSString *)[change objectForKey:NSKeyValueChangeNewKey];
+			NSString *newValue = (NSString *)change[NSKeyValueChangeNewKey];
 			self.locationStatusLabel.text = newValue;
 
 		} else if ([keyPath isEqualToString:@"closestBeacon"]) {
-			CLBeacon *newValue = (CLBeacon *)[change objectForKey:NSKeyValueChangeNewKey];
+			CLBeacon *newValue = (CLBeacon *)change[NSKeyValueChangeNewKey];
 
 			if (![newValue isEqual:[NSNull null]]) {
 				self.closestBeaconLabel.text = [NSString stringWithFormat:@"%@/%@", newValue.major, newValue.minor];
@@ -90,7 +90,7 @@
 				self.beaconSignalStrengthLabel.text = @"?";
 			}
 		} else if ([keyPath isEqualToString:@"location"]) {
-			CLLocation *newLocation = (CLLocation *)[change objectForKey:NSKeyValueChangeNewKey];
+			CLLocation *newLocation = (CLLocation *)change[NSKeyValueChangeNewKey];
 			self.latitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
 			self.longitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
 		}
@@ -98,7 +98,7 @@
 	} else if (object == [NSUserDefaults standardUserDefaults]) {
 
 		if ([keyPath isEqualToString:@"username"]) {
-			NSString *newValue = (NSString *)[change objectForKey:NSKeyValueChangeNewKey];
+			NSString *newValue = (NSString *)change[NSKeyValueChangeNewKey];
 
 			self.nameLabel.text = newValue;
 		}
@@ -127,7 +127,7 @@
 
 	[self.locationManager addObserver:self forKeyPath:@"closestBeacon" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)  context:NULL];
 
-	self.versionLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+	self.versionLabel.text = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 

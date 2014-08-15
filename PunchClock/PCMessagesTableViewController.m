@@ -13,7 +13,7 @@
 
 @interface PCMessagesTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *messages;
+@property (nonatomic, copy) NSArray *messages;
 
 @end
 
@@ -68,7 +68,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 		return 0;
 	}
 	
-	return self.messages.count;
+	return [self.messages count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,8 +86,8 @@ static NSString *cellIdentifier = @"MessageTableCell";
 	NSMutableURLRequest *URLRequest = [serializer requestWithMethod:@"GET" URLString:imageURL parameters:nil error:nil];
 	
 
-	[cell.avatarImageView.layer setCornerRadius:cell.avatarImageView.frame.size.width / 2];
-	[cell.avatarImageView setClipsToBounds:YES];
+	cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2;
+	cell.avatarImageView.clipsToBounds = YES;
 	[cell.avatarImageView setImageWithURLRequest:URLRequest
 					 placeholderImage:[UIImage imageNamed:@"unknown"]
 							  success:nil
@@ -114,7 +114,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 
 - (NSDateFormatter *)displayDateFormatter
 {
-	static NSDateFormatter *_dateFormatter;
+	NSDateFormatter *_dateFormatter;
 
 	if (!_dateFormatter) {
 		_dateFormatter = [[NSDateFormatter alloc] init];
@@ -128,7 +128,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 
 - (NSDateFormatter *)ISO8601DateFormatter
 {
-	static NSDateFormatter *_dateFormatter;
+	NSDateFormatter *_dateFormatter;
 
 	if (!_dateFormatter) {
 		_dateFormatter = [[NSDateFormatter alloc] init];

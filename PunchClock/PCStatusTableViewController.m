@@ -164,7 +164,7 @@
 		DDLogDebug(@"Response: %@", responseObject);
 		NSNumber *status_changed = responseObject[@"status_changed"];
 
-		if (!isInBackground && status_changed.boolValue) {
+		if (!isInBackground && [status_changed boolValue]) {
 			NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
 			[[NSNotificationCenter defaultCenter] postNotification:n];
 		}
