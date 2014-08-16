@@ -37,6 +37,7 @@
 		1AF7D5891850119F006B1FA4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */; };
 		308A9EBE19844B60002BBC50 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 308A9EBC19844B60002BBC50 /* Localizable.strings */; };
 		308A9EC119844BAA002BBC50 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 308A9EBF19844BAA002BBC50 /* Localizable.stringsdict */; };
+		30C3D09319888D9100FC60CD /* PCInformationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C3D09219888D9100FC60CD /* PCInformationLabel.m */; };
 		D40341EAF4384A82B93FCE57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE64CEC02D345349586E792 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,8 @@
 		308A9EBB19841ABB002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		308A9EBD19844B60002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		308A9EC019844BAA002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		30C3D09119888D9100FC60CD /* PCInformationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCInformationLabel.h; sourceTree = "<group>"; };
+		30C3D09219888D9100FC60CD /* PCInformationLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCInformationLabel.m; sourceTree = "<group>"; };
 		3EE64CEC02D345349586E792 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +229,8 @@
 				1A791DC618442884000943E4 /* PCLocationTableViewController.m */,
 				1AD4978D18D2279100817DD3 /* PCNameViewController.h */,
 				1AD4978E18D2279100817DD3 /* PCNameViewController.m */,
+				30C3D09119888D9100FC60CD /* PCInformationLabel.h */,
+				30C3D09219888D9100FC60CD /* PCInformationLabel.m */,
 			);
 			name = Information;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				1A631DD218D77AF6004B7D90 /* PCTabBarController.m in Sources */,
 				073D18A9197DDC1100B92209 /* PCTableViewController.m in Sources */,
 				1A791DC718442884000943E4 /* PCLocationTableViewController.m in Sources */,
+				30C3D09319888D9100FC60CD /* PCInformationLabel.m in Sources */,
 				1A30A7EC18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m in Sources */,
 				1A01C2171857E2080089B546 /* PCStatusTableDataSource.m in Sources */,
 				1A4CF3C018E3812E0086BCC0 /* UIView+Borders.m in Sources */,
