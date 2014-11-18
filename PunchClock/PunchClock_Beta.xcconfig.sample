@@ -6,5 +6,10 @@
 //  Copyright (c) 2014 Panic Inc. All rights reserved.
 //
 
-CODE_SIGN_IDENTITY = iPhone Distribution: 
-GCC_PREPROCESSOR_DEFINITIONS = CONFIGURATION_$(CONFIGURATION) $(inherited)
+#include "PunchClock_Global.xcconfig"
+
+CODE_SIGN_IDENTITY = iPhone Distribution
+
+OTHER_CFLAGS[config=*] = -DNS_BLOCK_ASSERTIONS=1 $(inherited)
+
+GCC_PREPROCESSOR_DEFINITIONS[config=*] = DEBUG=0 IS_BETA=1 CONFIGURATION_$(CONFIGURATION)=1 $(inherited)
