@@ -26,46 +26,23 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"messageFormSegue"]) {
-        MZFormSheetSegue *formSheetSegue = (MZFormSheetSegue *)segue;
-        MZFormSheetController *formSheet = formSheetSegue.formSheetController;
-        formSheet.transitionStyle = MZFormSheetTransitionStyleBounce;
-        formSheet.cornerRadius = 8.0;
+	if ([segue.identifier isEqualToString:@"messageFormSegue"]) {
+		MZFormSheetSegue *formSheetSegue = (MZFormSheetSegue *)segue;
+		MZFormSheetController *formSheet = formSheetSegue.formSheetController;
+		formSheet.transitionStyle = MZFormSheetTransitionStyleBounce;
+		formSheet.cornerRadius = 8.0;
 		formSheet.presentedFormSheetSize = CGSizeMake(284.0, 200.0);
-		
-        formSheet.didTapOnBackgroundViewCompletionHandler = ^(CGPoint location) {
+
+		formSheet.didTapOnBackgroundViewCompletionHandler = ^(CGPoint location) {
 			// Just dismiss it
-        };
+		};
 
-        formSheet.shouldDismissOnBackgroundViewTap = YES;
+		formSheet.shouldDismissOnBackgroundViewTap = YES;
 
-        formSheet.didPresentCompletionHandler = ^(UIViewController *presentedFSViewController) {
+		formSheet.didPresentCompletionHandler = ^(UIViewController *presentedFSViewController) {
 
-        };
-    }
-}
-
-- (void)presentPrivacyDialogWithTitle:(NSString *)title message:(NSString *)message
-{
-	UIAlertController *alertController = [UIAlertController
-										  alertControllerWithTitle:title
-										  message:message
-										  preferredStyle:UIAlertControllerStyleAlert];
-	UIAlertAction *okAction = [UIAlertAction
-							   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-							   style:UIAlertActionStyleDefault
-							   handler:nil];
-	[alertController addAction:okAction];
-
-	UIAlertAction *settingsAction = [UIAlertAction
-									 actionWithTitle:NSLocalizedString(@"Settings", @"Settings")
-									 style:UIAlertActionStyleDefault
-									 handler:^(UIAlertAction *action)
-									 {
-										 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];								   }];
-	[alertController addAction:settingsAction];
-	[self presentViewController:alertController animated:YES completion:nil];
-
+		};
+	}
 }
 
 - (void)refreshData:(id)sender
@@ -82,11 +59,11 @@
 
 	[self.refreshControl endRefreshing];
 	[self.tableView reloadData];
-//	self.tabBarItem.badgeValue = [count stringValue];
+	//	self.tabBarItem.badgeValue = [count stringValue];
 
 	// TODO: Localization Dictionary
 	self.toolbarTitle.text = [NSString localizedStringWithFormat:NSLocalizedString(@"%d People", nil),
-							  [count unsignedIntValue]];
+														[count unsignedIntValue]];
 
 	self.messageButton.enabled = ([count compare:@0] == NSOrderedDescending);
 
@@ -111,32 +88,32 @@
 
 	AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:PCbaseURL]];
 	[manager.requestSerializer setAuthorizationHeaderFieldWithUsername:backendUsername password:backendPassword];
-	
+
 	NSString *urlString = [[NSString stringWithFormat:@"%@/%@/%@", PCbaseURL, action, name] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
 	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:urlString
-																	 parameters:@{@"name": username}
-																		  error:nil];
+																																		URLString:urlString
+																																	 parameters:@{@"name": username}
+																																				error:nil];
 
 
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+	operation.responseSerializer = [AFJSONResponseSerializer serializer];
 
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
+	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
 
-        NSDictionary *response = (NSDictionary *)responseObject;
+		NSDictionary *response = (NSDictionary *)responseObject;
 		DDLogDebug(@"Watch update response: %@", response);
 
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusUpdated" object:nil]];
 
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
+	} failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
 		DDLogError(@"Watch update failed: %@", error.localizedDescription);
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"StatusUpdated" object:nil]];
 
-    }];
+	}];
 
-    [operation start];
+	[operation start];
 
 
 }
@@ -171,18 +148,18 @@
 	}
 
 	NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST"
-																	  URLString:[NSString stringWithFormat:@"%@/status/update", PCbaseURL]
-																	 parameters:@{@"status": status,
-																				  @"name": username,
-																				  @"push_id": push_id,
-																				  @"beacon_minor": beacon_minor}
-																		  error:nil];
+																																		URLString:[NSString stringWithFormat:@"%@/status/update", PCbaseURL]
+																																	 parameters:@{@"status": status,
+																																								@"name": username,
+																																								@"push_id": push_id,
+																																								@"beacon_minor": beacon_minor}
+																																				error:nil];
 	request.timeoutInterval = 5;
 
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+	operation.responseSerializer = [AFJSONResponseSerializer serializer];
 
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
+	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
 
 		DDLogDebug(@"Response: %@", responseObject);
 		NSNumber *status_changed = responseObject[@"status_changed"];
@@ -194,19 +171,46 @@
 
 		dispatch_group_leave([[PCLocationManager sharedLocationManager] dispatchGroup]);
 
-    } failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
+	} failure:^(AFHTTPRequestOperation *requestOperation, NSError *error) {
 		DDLogError(@"Status update failed: %@", error.localizedDescription);
 		dispatch_group_leave([[PCLocationManager sharedLocationManager] dispatchGroup]);
 
-    }];
+	}];
 
 	[operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
 		// Handle iOS shutting you down (possibly make a note of where you
 		// stopped so you can resume later)
 	}];
 
-    [operation start];
-	
+	[operation start];
+
+}
+
+- (void)presentPrivacyDialogWithTitle:(NSString *)title message:(NSString *)message
+{
+	UIAlertController *alertController = [UIAlertController
+																				alertControllerWithTitle:title
+																				message:message
+																				preferredStyle:UIAlertControllerStyleAlert];
+
+	UIAlertAction *okAction = [UIAlertAction
+														 actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+														 style:UIAlertActionStyleDefault
+														 handler:nil];
+	[alertController addAction:okAction];
+
+	UIAlertAction *settingsAction = [UIAlertAction
+																	 actionWithTitle:NSLocalizedString(@"Settings", @"Settings")
+																	 style:UIAlertActionStyleDefault
+																	 handler:^(UIAlertAction *action)
+																	 {
+																		 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];
+																	 }];
+
+	[alertController addAction:settingsAction];
+
+	[self presentViewController:alertController animated:YES completion:nil];
+
 }
 
 - (void)viewDidLoad
@@ -214,19 +218,19 @@
 	[super viewDidLoad];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(refreshData:)
-												 name:UIApplicationDidBecomeActiveNotification
-											   object:nil];
+																					 selector:@selector(refreshData:)
+																							 name:UIApplicationDidBecomeActiveNotification
+																						 object:nil];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(refreshData:)
-												 name:@"StatusUpdated"
-											   object:nil];
-	
+																					 selector:@selector(refreshData:)
+																							 name:@"StatusUpdated"
+																						 object:nil];
+
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(refreshCompleted:)
-												 name:@"StatusesUpdated"
-											   object:nil];
+																					 selector:@selector(refreshCompleted:)
+																							 name:@"StatusesUpdated"
+																						 object:nil];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:@"username"];
@@ -237,11 +241,11 @@
 
 
 	[[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
-    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
-    [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
-
+	[[MZFormSheetBackgroundWindow appearance] setBlurRadius:5.0];
+	[[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
+	
 	[[PCLocationManager sharedLocationManager] setDelegate:self];
-
+	
 }
 
 - (void)dealloc

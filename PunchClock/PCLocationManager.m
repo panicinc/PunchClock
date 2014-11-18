@@ -101,6 +101,7 @@
 - (BOOL)canTrackLocation
 {
 	NSString *errorMsg;
+	NSString *errorTitle;
 	CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
 
 	if (!_locationManager) {
@@ -127,6 +128,8 @@
 				
 				errorMsg = NSLocalizedString(@"To use background location you must turn on 'Always' in the Location Services Settings", @"To use background location you must turn on 'Always' in the Location Services Settings");
 
+				errorTitle = (status == kCLAuthorizationStatusDenied) ? NSLocalizedString(@"Location services are off", @"Location services are off") : NSLocalizedString(@"Background location is not enabled", @"Background location is not enabled");
+
 			} else if ( [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined ) {
 
 				[self.locationManager requestAlwaysAuthorization];
@@ -135,51 +138,22 @@
 			} else {
 				
 				// We have the services we need to get started
-				DDLogVerbose(@"We can track locations");
+				DDLogDebug(@"We can track locations");
 
 				return YES;
 			}
 		}
 	}
 
-	if (!self.trackLocationNotified) {
+	if (!self.trackLocationNotified && errorMsg && self.delegate) {
 
-		NSString *title = (status == kCLAuthorizationStatusDenied) ? NSLocalizedString(@"Location services are off", @"Location services are off") : NSLocalizedString(@"Background location is not enabled", @"Background location is not enabled");
-
-		UIAlertController *alertController = [UIAlertController
-											  alertControllerWithTitle:title
-											  message:errorMsg
-											  preferredStyle:UIAlertControllerStyleAlert];
-		UIAlertAction *okAction = [UIAlertAction
-								   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-								   style:UIAlertActionStyleDefault
-								   handler:nil];
-		[alertController addAction:okAction];
-
-		UIAlertAction *settingsAction = [UIAlertAction
-								   actionWithTitle:NSLocalizedString(@"Settings", @"Settings")
-								   style:UIAlertActionStyleDefault
-								   handler:^(UIAlertAction *action)
-								   {
-									   [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];								   }];
-		[alertController addAction:settingsAction];
-
-		[self.delegate presentPrivacyDialogWithTitle:title message:errorMsg];
-
-//		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-//															message:errorMsg
-//														   delegate:self
-//												  cancelButtonTitle:@"Cancel"
-//												  otherButtonTitles:@"Settings", nil];
 		self.trackLocationNotified = YES;
-//		[alertView show];
+		DDLogError(@"%@", errorMsg);
 
-//		UILocalNotification *notification = [[UILocalNotification alloc] init];
-//		notification.alertBody = errorMsg;
-//		[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+		[self.delegate presentPrivacyDialogWithTitle:errorTitle message:errorMsg];
+
 	}
 
-	DDLogError(@"%@", errorMsg);
 	self.nearOffice = NO;
 
 	return NO;
@@ -187,13 +161,23 @@
 
 - (void)setupManager
 {
+	DDLogDebug(@"Setting up location manager");
+
+	// We set this up even before we know if we can use them because they can't be nil with most locationManager methods
+	
+	_beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:beaconUUID]
+																										 identifier:officeBeaconIdentifier];
+	_beaconRegion.notifyEntryStateOnDisplay = YES;
+	_beaconRegion.notifyOnEntry = YES;
+	_beaconRegion.notifyOnExit = YES;
+
+	self.officeRegion = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(geoFenceLat, geoFenceLong)
+																												radius:geoFenceRadius
+																										identifier:officeIdentifier];
 
 	if (!self.canTrackLocation || self.setupCompleted) {
 		return;
 	}
-
-	DDLogDebug(@"Setting up location manager");
-
 
 	self.lastExitDate = [NSDate dateWithTimeIntervalSince1970:0];
 	self.lastEntryDate = [NSDate dateWithTimeIntervalSince1970:0];
@@ -204,19 +188,11 @@
 	_locationManager.distanceFilter = kCLLocationAccuracyBest;
 	_locationManager.activityType = CLActivityTypeAutomotiveNavigation;
 
-	_beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:beaconUUID]
-													   identifier:officeBeaconIdentifier];
-	_beaconRegion.notifyEntryStateOnDisplay = YES;
-	_beaconRegion.notifyOnEntry = YES;
-	_beaconRegion.notifyOnExit = YES;
 
 	[_locationManager stopMonitoringForRegion:_beaconRegion];
 	[_locationManager startMonitoringForRegion:_beaconRegion];
 	[_locationManager requestStateForRegion:_beaconRegion];
 
-	self.officeRegion = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(geoFenceLat, geoFenceLong)
-														  radius:geoFenceRadius
-													  identifier:officeIdentifier];
 
 
 	[_locationManager startUpdatingLocation];
@@ -313,10 +289,10 @@
 - (void)enterForeground
 {
 
-	if (!self.setupCompleted) {
-		[self setupManager];
-		return;
-	}
+	self.trackLocationNotified = NO;
+	self.setupCompleted = NO;
+
+	[self setupManager];
 
 	DDLogDebug(@"Entering Foreground");
 
