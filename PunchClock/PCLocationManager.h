@@ -12,6 +12,7 @@
 @protocol PCLocationManagerDelegate <NSObject>
 
 - (void)updateWithStatus:(NSString *)status withBeacon:(CLBeacon *)beacon;
+- (void)presentPrivacyDialogWithTitle:(NSString *)title message:(NSString *)message;
 
 @end
 

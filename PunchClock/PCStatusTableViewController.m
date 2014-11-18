@@ -45,6 +45,29 @@
     }
 }
 
+- (void)presentPrivacyDialogWithTitle:(NSString *)title message:(NSString *)message
+{
+	UIAlertController *alertController = [UIAlertController
+										  alertControllerWithTitle:title
+										  message:message
+										  preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *okAction = [UIAlertAction
+							   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+							   style:UIAlertActionStyleDefault
+							   handler:nil];
+	[alertController addAction:okAction];
+
+	UIAlertAction *settingsAction = [UIAlertAction
+									 actionWithTitle:NSLocalizedString(@"Settings", @"Settings")
+									 style:UIAlertActionStyleDefault
+									 handler:^(UIAlertAction *action)
+									 {
+										 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];								   }];
+	[alertController addAction:settingsAction];
+	[self presentViewController:alertController animated:YES completion:nil];
+
+}
+
 - (void)refreshData:(id)sender
 {
 	DDLogDebug(@"Refreshing");

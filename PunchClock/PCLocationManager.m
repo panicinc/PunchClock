@@ -101,6 +101,7 @@
 - (BOOL)canTrackLocation
 {
 	NSString *errorMsg;
+	CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
 
 	if (!_locationManager) {
 		_locationManager = [CLLocationManager new];
@@ -122,9 +123,9 @@
 
 			CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
 
-			if ( status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted) {
+			if ( status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
 				
-				errorMsg = NSLocalizedString(@"Location Tracking Unavailable. Please allow access in Settings->Privacy->Location Services->PunchClock", nil);
+				errorMsg = NSLocalizedString(@"To use background location you must turn on 'Always' in the Location Services Settings", @"To use background location you must turn on 'Always' in the Location Services Settings");
 
 			} else if ( [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined ) {
 
@@ -142,10 +143,40 @@
 	}
 
 	if (!self.trackLocationNotified) {
-		UILocalNotification *notification = [[UILocalNotification alloc] init];
-		notification.alertBody = errorMsg;
-		[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+
+		NSString *title = (status == kCLAuthorizationStatusDenied) ? NSLocalizedString(@"Location services are off", @"Location services are off") : NSLocalizedString(@"Background location is not enabled", @"Background location is not enabled");
+
+		UIAlertController *alertController = [UIAlertController
+											  alertControllerWithTitle:title
+											  message:errorMsg
+											  preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertAction *okAction = [UIAlertAction
+								   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+								   style:UIAlertActionStyleDefault
+								   handler:nil];
+		[alertController addAction:okAction];
+
+		UIAlertAction *settingsAction = [UIAlertAction
+								   actionWithTitle:NSLocalizedString(@"Settings", @"Settings")
+								   style:UIAlertActionStyleDefault
+								   handler:^(UIAlertAction *action)
+								   {
+									   [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];								   }];
+		[alertController addAction:settingsAction];
+
+		[self.delegate presentPrivacyDialogWithTitle:title message:errorMsg];
+
+//		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+//															message:errorMsg
+//														   delegate:self
+//												  cancelButtonTitle:@"Cancel"
+//												  otherButtonTitles:@"Settings", nil];
 		self.trackLocationNotified = YES;
+//		[alertView show];
+
+//		UILocalNotification *notification = [[UILocalNotification alloc] init];
+//		notification.alertBody = errorMsg;
+//		[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 	}
 
 	DDLogError(@"%@", errorMsg);
