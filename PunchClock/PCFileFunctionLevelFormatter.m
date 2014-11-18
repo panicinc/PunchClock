@@ -13,12 +13,14 @@
 - (id)init
 {
 	if ((self = [super init])) {
-        threadUnsafeDateFormatter = [[NSDateFormatter alloc] init];
-        [threadUnsafeDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-        [threadUnsafeDateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
-    }
+		threadUnsafeDateFormatter = [[NSDateFormatter alloc] init];
+		[threadUnsafeDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+		[threadUnsafeDateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
+		NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+		[threadUnsafeDateFormatter setLocale:enUSPOSIXLocale];
+	}
 
-    return self;
+	return self;
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
@@ -26,6 +28,7 @@
 	NSString *logLevel = nil;
 
 	switch (logMessage->logFlag) {
+
 		case LOG_FLAG_ERROR : logLevel = @"E"; break;
 
 		case LOG_FLAG_WARN  : logLevel = @"W"; break;
@@ -42,21 +45,21 @@
 	return [NSString stringWithFormat:@"[%@] %@ [%@ %@:%d] => %@",
 			logLevel,
 			dateAndTime,
-			logMessage.fileName,
-			logMessage.methodName,
+			[logMessage fileName],
+			[logMessage methodName],
 			logMessage->lineNumber,
 			logMessage->logMsg];
 }
 
 - (void)didAddToLogger:(id <DDLogger>)logger
 {
-    loggerCount++;
-    NSAssert(loggerCount <= 1, @"This logger isn't thread-safe");
+	loggerCount++;
+	NSAssert(loggerCount <= 1, @"This logger isn't thread-safe");
 }
 
 - (void)willRemoveFromLogger:(id <DDLogger>)logger
 {
-    loggerCount--;
+	loggerCount--;
 }
 
 @end

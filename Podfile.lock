@@ -6,36 +6,39 @@ PODS:
   - ADiOSUtilities/ADFoundationAdditions (1.0.0)
   - ADiOSUtilities/ADHelpers (1.0.0)
   - ADiOSUtilities/ADUIKitAdditions (1.0.0)
-  - AFNetworking (2.3.1):
+  - AFNetworking (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.3.1):
+  - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.3.1):
+  - AFNetworking/NSURLSession (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.3.1)
-  - AFNetworking/Security (2.3.1)
-  - AFNetworking/Serialization (2.3.1)
-  - AFNetworking/UIKit (2.3.1):
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (1.9.1):
+  - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (1.9.1)
-  - CocoaLumberjack/Extensions (1.9.1):
+  - CocoaLumberjack/Core (1.9.2)
+  - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
-  - HockeySDK (3.5.5)
+  - HockeySDK (3.6.1)
   - KeychainItemWrapper (1.2)
   - MZAppearance (1.1.3)
-  - MZFormSheetController (2.3.4):
+  - MZFormSheetController (2.4.1):
+    - MZAppearance (~> 1.1.3)
+    - MZFormSheetController/Core
+  - MZFormSheetController/Core (2.4.1):
     - MZAppearance (~> 1.1.3)
   - Seriously (2.0.0)
   - ZeroPush (1.1.0):
@@ -44,21 +47,21 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - CocoaLumberjack
+  - CocoaLumberjack (~> 1.9)
   - HockeySDK
   - KeychainItemWrapper (~> 1.2)
   - MZFormSheetController (~> 2.3)
-  - ZeroPush
+  - ZeroPush (~> 1.1)
 
 SPEC CHECKSUMS:
   ADiOSUtilities: 4b3347dc334c55d890becd65a6f94c9984fd82a6
-  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
-  HockeySDK: f9af97c2f5df4eb6ca6d2a9c408f2ff498edd608
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
+  HockeySDK: 15b24068466aa5ee421eed0cc1d58428d698edf6
   KeychainItemWrapper: 577e9e920185892873ded075b8ceb730bebdfd91
   MZAppearance: c88502c0c2345120630c34e09d5ff09e2969ba30
-  MZFormSheetController: 8c453908080c338274e68908849029435d3e2736
+  MZFormSheetController: 4b58486f5f1562b3905310b02e8dbbb5a0a94128
   Seriously: 46d22ba1ae046629e2586364bce44ee838828291
   ZeroPush: 7e26e4abc1573cd559092ebcb2f79582abd7c41e
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.4

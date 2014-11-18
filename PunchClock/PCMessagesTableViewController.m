@@ -13,7 +13,7 @@
 
 @interface PCMessagesTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *messages;
+@property (nonatomic, copy) NSArray *messages;
 
 @end
 
@@ -26,6 +26,8 @@ static NSString *cellIdentifier = @"MessageTableCell";
 	[super viewDidLoad];
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
+	self.tableView.estimatedRowHeight = 68.0f;
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
 
 	[self refreshData:self];
 }
@@ -68,7 +70,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 		return 0;
 	}
 	
-	return self.messages.count;
+	return [self.messages count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,8 +88,8 @@ static NSString *cellIdentifier = @"MessageTableCell";
 	NSMutableURLRequest *URLRequest = [serializer requestWithMethod:@"GET" URLString:imageURL parameters:nil error:nil];
 	
 
-	[cell.avatarImageView.layer setCornerRadius:cell.avatarImageView.frame.size.width / 2];
-	[cell.avatarImageView setClipsToBounds:YES];
+	cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2;
+	cell.avatarImageView.clipsToBounds = YES;
 	[cell.avatarImageView setImageWithURLRequest:URLRequest
 					 placeholderImage:[UIImage imageNamed:@"unknown"]
 							  success:nil
@@ -97,7 +99,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 							  }];
 
 	cell.nameLabel.text = [username capitalizedString];
-	cell.messageTextView.text = message[@"message"];
+	cell.messageLabel.text = message[@"message"];
 	cell.dateLabel.text = [self formattedStringFromISO8601String:message[@"date"]];
 
 	return cell;
@@ -114,7 +116,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 
 - (NSDateFormatter *)displayDateFormatter
 {
-	static NSDateFormatter *_dateFormatter;
+	NSDateFormatter *_dateFormatter;
 
 	if (!_dateFormatter) {
 		_dateFormatter = [[NSDateFormatter alloc] init];
@@ -128,7 +130,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 
 - (NSDateFormatter *)ISO8601DateFormatter
 {
-	static NSDateFormatter *_dateFormatter;
+	NSDateFormatter *_dateFormatter;
 
 	if (!_dateFormatter) {
 		_dateFormatter = [[NSDateFormatter alloc] init];

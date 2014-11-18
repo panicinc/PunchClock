@@ -14,7 +14,7 @@
 @interface PCStatusTableDataSource()
 
 @property (nonatomic, strong, readonly) NSArray *allPeople;
-@property (atomic, strong) NSArray *fetchedPeople;
+@property (atomic, copy) NSArray *fetchedPeople;
 
 @property BOOL fetchingPeople;
 
@@ -97,7 +97,7 @@ static NSString *cellIdentifier = @"StatusTableCell";
 		return 0;
 	}
 
-	return self.allPeople.count;
+	return [self.allPeople count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,11 +111,11 @@ static NSString *cellIdentifier = @"StatusTableCell";
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *push_id = [defaults stringForKey:@"push_id"];
 
-	if (self.allPeople.count > 0) {
+	if ([self.allPeople count] > 0) {
 		NSDictionary *person = self.allPeople[indexPath.row];
 
 		// Image
-		NSString *username = [person objectForKey:@"name"];
+		NSString *username = person[@"name"];
 		NSString *imageURL = [[NSString stringWithFormat:@"%@/image/%@", PCbaseURL, username] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
 		AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
@@ -124,8 +124,8 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 
 		UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
-		[imageView.layer setCornerRadius:imageView.frame.size.width / 2];
-		[imageView setClipsToBounds:YES];
+		imageView.layer.cornerRadius = imageView.frame.size.width / 2;
+		imageView.clipsToBounds = YES;
 		[imageView setImageWithURLRequest:URLRequest
 						 placeholderImage:[UIImage imageNamed:@"unknown"]
 								  success:nil
@@ -140,11 +140,11 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 		// Status
 		PCStatusLabel *statusLabel = (PCStatusLabel *)[cell viewWithTag:2];
-		statusLabel.text = [person objectForKey:@"status"];
+		statusLabel.text = person[@"status"];
 
 		// Notification Bell
 		UIButton *bell = (UIButton *)[cell viewWithTag:4];
-		NSNumber *watched_by_value = (NSNumber *)[person objectForKey:@"watched_by_requestor"];
+		NSNumber *watched_by_value = (NSNumber *)person[@"watched_by_requestor"];
 		bell.selected = [watched_by_value boolValue];
 
 		if ([push_id isEqualToString:@""]) {
@@ -152,7 +152,7 @@ static NSString *cellIdentifier = @"StatusTableCell";
 		}
 
 		UIButton *eye = (UIButton *)[cell viewWithTag:5];
-		NSNumber *watches_value = (NSNumber *)[person objectForKey:@"watches_requestor"];
+		NSNumber *watches_value = (NSNumber *)person[@"watches_requestor"];
 		eye.hidden = ![watches_value boolValue];
 
 

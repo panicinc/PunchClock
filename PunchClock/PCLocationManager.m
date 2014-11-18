@@ -19,8 +19,8 @@
 @property (nonatomic, strong) NSDate *lastExitDate;
 @property (nonatomic, strong) NSDate *lastEntryDate;
 @property (nonatomic, strong) NSDate *lastNotificationDate;
-@property (nonatomic, strong) NSString *beaconDistance;
-@property (nonatomic, strong) NSString *officeDistance;
+@property (nonatomic, copy) NSString *beaconDistance;
+@property (nonatomic, copy) NSString *officeDistance;
 @property (nonatomic, strong) CLBeacon *closestBeacon;
 @property (nonatomic, strong) CLLocation *location;
 
@@ -65,17 +65,17 @@
 
 	if (self) {
 
-		self.nearOffice = NO;
-		self.inRange =  NO;
-		self.trackLocationNotified = NO;
-		self.setupCompleted = NO;
-		self.beaconDistance = @"?";
-		self.officeDistance = @"?";
-		self.officeDistanceValue = 1000;
-		self.geoFenceEnabled = NO;
-		self.closestBeacon = [[CLBeacon alloc] init];
+		_nearOffice = NO;
+		_inRange =  NO;
+		_trackLocationNotified = NO;
+		_setupCompleted = NO;
+		_beaconDistance = @"?";
+		_officeDistance = @"?";
+		_officeDistanceValue = 1000;
+		_geoFenceEnabled = NO;
+		_closestBeacon = [[CLBeacon alloc] init];
 
-		self.officeLocation = [[CLLocation alloc] initWithLatitude:geoFenceLat longitude:geoFenceLong];
+		_officeLocation = [[CLLocation alloc] initWithLatitude:geoFenceLat longitude:geoFenceLong];
 
 		[self setupManager];
 
@@ -83,7 +83,7 @@
 
 		[defaults addObserver:self forKeyPath:@"username" options:NSKeyValueObservingOptionNew context:NULL];
 
-		self.dispatchGroup = dispatch_group_create();
+		_dispatchGroup = dispatch_group_create();
 
 		[self updateLocationStatusOnTimer];
 
@@ -94,17 +94,17 @@
 
 - (void)dealloc
 {
+	self.locationManager.delegate = nil;
 	[self removeObserver:self forKeyPath:@"username"];
 }
 
 - (BOOL)canTrackLocation
 {
-
-#if TARGET_IPHONE_SIMULATOR
-//	return YES;
-#endif
-
 	NSString *errorMsg;
+
+	if (!_locationManager) {
+		_locationManager = [CLLocationManager new];
+	}
 
 	if (![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
 		DDLogError(@"Beacon Tracking Unavailable");
@@ -120,14 +120,22 @@
 
 		} else {
 
-			if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
-					[CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
+			CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+
+			if ( status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted) {
 				
-				errorMsg = NSLocalizedString(@"Location Tracking Unavailable", nil);
+				errorMsg = NSLocalizedString(@"Location Tracking Unavailable. Please allow access in Settings->Privacy->Location Services->PunchClock", nil);
+
+			} else if ( [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined ) {
+
+				[self.locationManager requestAlwaysAuthorization];
+				DDLogDebug(@"Requesting Authorization");
+
 			} else {
 				
 				// We have the services we need to get started
-				
+				DDLogVerbose(@"We can track locations");
+
 				return YES;
 			}
 		}
@@ -153,12 +161,14 @@
 		return;
 	}
 
+	DDLogDebug(@"Setting up location manager");
+
+
 	self.lastExitDate = [NSDate dateWithTimeIntervalSince1970:0];
 	self.lastEntryDate = [NSDate dateWithTimeIntervalSince1970:0];
 	self.lastNotificationDate = [NSDate dateWithTimeIntervalSince1970:0];
 	_bluetoothEnabled = YES;
 
-	_locationManager = [CLLocationManager new];
 	_locationManager.delegate = self;
 	_locationManager.distanceFilter = kCLLocationAccuracyBest;
 	_locationManager.activityType = CLActivityTypeAutomotiveNavigation;
@@ -223,7 +233,7 @@
 
 - (void)updateLocationStatusOnTimer
 {
-	if (self.updateTimer.isValid) {
+	if ([self.updateTimer isValid]) {
 		// The timer is already running.
 		[self.updateTimer invalidate];
 		DDLogVerbose(@"status update timer reset");
@@ -273,6 +283,7 @@
 {
 
 	if (!self.setupCompleted) {
+		[self setupManager];
 		return;
 	}
 
@@ -363,10 +374,14 @@
 
 - (void)stopRanging
 {
-	DDLogInfo(@"Stop Ranging");
-	[self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
-	self.isRanging = NO;
-	self.closestBeacon = nil;
+	CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+
+	if ( status != kCLAuthorizationStatusNotDetermined ) {
+		DDLogInfo(@"Stop Ranging");
+		[self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
+		self.isRanging = NO;
+		self.closestBeacon = nil;
+	}
 }
 
 - (void)setInRange:(BOOL)inRange
@@ -407,6 +422,15 @@
 	return NO;
 }
 
+- (void)setClosestBeacon:(CLBeacon *)beacon
+{
+	if (_closestBeacon.minor != beacon.minor || _closestBeacon.proximity != beacon.proximity) {
+		[self updateLocationStatusOnTimer];
+	}
+
+	_closestBeacon = beacon;
+}
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -440,23 +464,28 @@
 
 	self.bluetoothEnabled = YES;
 
-	if (beacons.count == 0) {
+	if ([beacons count] == 0) {
 		self.inRange = NO;
 		return;
 	}
 
 	DDLogVerbose(@"%ld Beacons found", (long) beacons.count);
 
-	NSInteger strongestSignal = -100;
+	CLLocationAccuracy closestSignal = 100;
+	CLBeacon *closestBeacon;
 
 	for (CLBeacon *beacon in beacons) {
 
-		if (beacon.rssi > strongestSignal && beacon.rssi != 0) {
-			self.closestBeacon = beacon;
+		DDLogVerbose(@"Beacon #%@/%@ Distance: %li Signal: %ld: Accuracy: %f", beacon.major, beacon.minor, (long)self.closestBeacon.proximity, (long) beacon.rssi, beacon.accuracy);
+
+		if (beacon.accuracy < closestSignal && beacon.accuracy > 0) {
+			closestSignal = beacon.accuracy;
+			closestBeacon = beacon;
 		}
-		DDLogVerbose(@"Ranging Beacon #%@/%@ Region: %@ Distance: %@ Signal: %ld", beacon.major, beacon.minor, region.identifier, self.beaconDistance, (long) beacon.rssi);
 
 	}
+
+	self.closestBeacon = closestBeacon;
 
 	if (self.closestBeacon.proximity == CLProximityUnknown) {
 		self.beaconDistance = @"?";
@@ -521,6 +550,8 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
 	self.trackLocationNotified = NO;
+	self.setupCompleted = NO;
+
 	[self setupManager];
 }
 
@@ -533,21 +564,43 @@
 
 	if ([region.identifier isEqualToString:officeBeaconIdentifier]) {
 
-		if (state == CLRegionStateInside) {
-			self.inRange = YES;
-		} else if (state == CLRegionStateOutside) {
-			self.inRange = NO;
+		switch (state) {
+			case CLRegionStateInside:
+				self.inRange = YES;
+
+				break;
+			case CLRegionStateOutside:
+			case CLRegionStateUnknown:
+			default:
+				self.inRange = NO;
 		}
+
 
 	} else if ([region.identifier isEqualToString:officeIdentifier]) {
 
-		if (state == CLRegionStateInside) {
-			self.nearOffice = YES;
-		} else if (state == CLRegionStateOutside) {
-			self.nearOffice = NO;
+		switch (state) {
+			case CLRegionStateInside:
+				self.nearOffice = YES;
+
+				break;
+			case CLRegionStateOutside:
+			case CLRegionStateUnknown:
+			default:
+				self.nearOffice = NO;
 		}
+
 	}
 
+}
+
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager
+{
+	DDLogDebug(@"Pausing updates");
+}
+
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager
+{
+	DDLogDebug(@"Resuming Updates");
 }
 
 @end
