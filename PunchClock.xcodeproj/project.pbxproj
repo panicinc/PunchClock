@@ -89,18 +89,10 @@
 		1A8439A518FC640A00F3AC85 /* status.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = status.caf; sourceTree = "<group>"; };
 		1A8439A618FC640A00F3AC85 /* message.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = message.caf; sourceTree = "<group>"; };
 		1A88E3531868FAA80084EF92 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		1AB708EF199E7EAF00544362 /* Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Global.xcconfig; sourceTree = "<group>"; };
-		1AB708F1199E7EAF00544362 /* iOS_Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Beta.xcconfig; sourceTree = "<group>"; };
-		1AB708F2199E7EAF00544362 /* iOS_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Debug.xcconfig; sourceTree = "<group>"; };
-		1AB708F3199E7EAF00544362 /* iOS_Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Global.xcconfig; sourceTree = "<group>"; };
-		1AB708F4199E7EAF00544362 /* iOS_Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Release.xcconfig; sourceTree = "<group>"; };
 		1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = PunchClock_Debug.xcconfig; path = PunchClock/PunchClock_Debug.xcconfig; sourceTree = "<group>"; };
 		1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = PunchClock_Beta.xcconfig; path = PunchClock/PunchClock_Beta.xcconfig; sourceTree = "<group>"; };
 		1AD4978D18D2279100817DD3 /* PCNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCNameViewController.h; sourceTree = "<group>"; };
 		1AD4978E18D2279100817DD3 /* PCNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCNameViewController.m; sourceTree = "<group>"; };
-		1AF7D57D18501141006B1FA4 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		1AF7D57F18501141006B1FA4 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		1AF7D58018501141006B1FA4 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		1AF7D58418501169006B1FA4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1AF7D58618501195006B1FA4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -112,7 +104,6 @@
 		5E23B8A9198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5E23B8AA198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		5E23B8AB198FFB150068CDEC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				1A507A7118564A3200138C44 /* AddressBook.framework */,
-				1AF7D57C18501141006B1FA4 /* HockeySDK.embeddedframework */,
 				1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */,
 				1AF7D58618501195006B1FA4 /* Security.framework */,
 				1AF7D58418501169006B1FA4 /* CoreText.framework */,
@@ -232,32 +222,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		1AB708EE199E7EAF00544362 /* BuildConfigs */ = {
-			isa = PBXGroup;
-			children = (
-				1AB708EF199E7EAF00544362 /* Global.xcconfig */,
-				1AB708F0199E7EAF00544362 /* iOS */,
-			);
-			path = BuildConfigs;
-			sourceTree = "<group>";
-		};
-		1AB708F0199E7EAF00544362 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				1AB708F1199E7EAF00544362 /* iOS_Beta.xcconfig */,
-				1AB708F2199E7EAF00544362 /* iOS_Debug.xcconfig */,
-				1AB708F3199E7EAF00544362 /* iOS_Global.xcconfig */,
-				1AB708F4199E7EAF00544362 /* iOS_Release.xcconfig */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 		1AB708FA199E7EB400544362 /* BuildConfigs */ = {
 			isa = PBXGroup;
 			children = (
 				1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */,
 				1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */,
-				1AB708EE199E7EAF00544362 /* BuildConfigs */,
 			);
 			name = BuildConfigs;
 			sourceTree = "<group>";
