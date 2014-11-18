@@ -68,6 +68,8 @@
 		1A5E10F918779CB30079CC56 /* PCStatusLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCStatusLabel.m; sourceTree = "<group>"; };
 		1A631DD018D77AF6004B7D90 /* PCTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTabBarController.h; sourceTree = "<group>"; };
 		1A631DD118D77AF6004B7D90 /* PCTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCTabBarController.m; sourceTree = "<group>"; };
+		1A76FCC41A1BF50E00CB7220 /* PunchClock_Beta.xcconfig.sample */ = {isa = PBXFileReference; lastKnownFileType = text; name = PunchClock_Beta.xcconfig.sample; path = PunchClock/PunchClock_Beta.xcconfig.sample; sourceTree = "<group>"; };
+		1A76FCC51A1BF50E00CB7220 /* PunchClock_Debug.xcconfig.sample */ = {isa = PBXFileReference; lastKnownFileType = text; name = PunchClock_Debug.xcconfig.sample; path = PunchClock/PunchClock_Debug.xcconfig.sample; sourceTree = "<group>"; };
 		1A791DAD18442884000943E4 /* PunchClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PunchClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A791DB018442884000943E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1A791DB218442884000943E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -225,6 +227,8 @@
 		1AB708FA199E7EB400544362 /* BuildConfigs */ = {
 			isa = PBXGroup;
 			children = (
+				1A76FCC41A1BF50E00CB7220 /* PunchClock_Beta.xcconfig.sample */,
+				1A76FCC51A1BF50E00CB7220 /* PunchClock_Debug.xcconfig.sample */,
 				1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */,
 				1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */,
 			);
