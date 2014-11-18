@@ -11,6 +11,7 @@
 		073D18A9197DDC1100B92209 /* PCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073D18A8197DDC1100B92209 /* PCTableViewController.m */; };
 		073D18AC197DE41B00B92209 /* PCMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073D18AB197DE41B00B92209 /* PCMessageTableViewCell.m */; };
 		1A01C2171857E2080089B546 /* PCStatusTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A01C2161857E2080089B546 /* PCStatusTableDataSource.m */; };
+		1A032CF01A1AA68200633D97 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A032CEF1A1AA68200633D97 /* Launch Screen.xib */; };
 		1A30A7EC18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A30A7EB18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m */; };
 		1A31D8691858D13700BA2CFE /* PCStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A31D8681858D13700BA2CFE /* PCStatusTableViewController.m */; };
 		1A4C2982184DACE300CD0868 /* PCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4C2981184DACE300CD0868 /* PCLocationManager.m */; };
@@ -47,8 +48,11 @@
 		073D18A8197DDC1100B92209 /* PCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCTableViewController.m; sourceTree = "<group>"; };
 		073D18AA197DE41B00B92209 /* PCMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMessageTableViewCell.h; sourceTree = "<group>"; };
 		073D18AB197DE41B00B92209 /* PCMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMessageTableViewCell.m; sourceTree = "<group>"; };
+		09F295D1F09C9A231E43156E /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.beta.xcconfig; path = "Pods/Target Support Files/Pods/Pods.beta.xcconfig"; sourceTree = "<group>"; };
+		0B80FF4B46B02D053612EDEF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1A01C2151857E2080089B546 /* PCStatusTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCStatusTableDataSource.h; sourceTree = "<group>"; };
 		1A01C2161857E2080089B546 /* PCStatusTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCStatusTableDataSource.m; sourceTree = "<group>"; };
+		1A032CEF1A1AA68200633D97 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		1A30A7EA18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCFileFunctionLevelFormatter.h; sourceTree = "<group>"; };
 		1A30A7EB18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCFileFunctionLevelFormatter.m; sourceTree = "<group>"; };
 		1A31D8671858D13700BA2CFE /* PCStatusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCStatusTableViewController.h; sourceTree = "<group>"; };
@@ -85,21 +89,22 @@
 		1A8439A518FC640A00F3AC85 /* status.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = status.caf; sourceTree = "<group>"; };
 		1A8439A618FC640A00F3AC85 /* message.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = message.caf; sourceTree = "<group>"; };
 		1A88E3531868FAA80084EF92 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = PunchClock_Debug.xcconfig; sourceTree = "<group>"; };
-		1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = PunchClock_Beta.xcconfig; sourceTree = "<group>"; };
+		1AB708EF199E7EAF00544362 /* Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Global.xcconfig; sourceTree = "<group>"; };
+		1AB708F1199E7EAF00544362 /* iOS_Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Beta.xcconfig; sourceTree = "<group>"; };
+		1AB708F2199E7EAF00544362 /* iOS_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Debug.xcconfig; sourceTree = "<group>"; };
+		1AB708F3199E7EAF00544362 /* iOS_Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Global.xcconfig; sourceTree = "<group>"; };
+		1AB708F4199E7EAF00544362 /* iOS_Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS_Release.xcconfig; sourceTree = "<group>"; };
+		1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = PunchClock_Debug.xcconfig; path = PunchClock/PunchClock_Debug.xcconfig; sourceTree = "<group>"; };
+		1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = PunchClock_Beta.xcconfig; path = PunchClock/PunchClock_Beta.xcconfig; sourceTree = "<group>"; };
 		1AD4978D18D2279100817DD3 /* PCNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCNameViewController.h; sourceTree = "<group>"; };
 		1AD4978E18D2279100817DD3 /* PCNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCNameViewController.m; sourceTree = "<group>"; };
-		1AF7D57D18501141006B1FA4 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		1AF7D57F18501141006B1FA4 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		1AF7D58018501141006B1FA4 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		1AF7D58418501169006B1FA4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1AF7D58618501195006B1FA4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		308A9EBB19841ABB002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		308A9EBD19844B60002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		308A9EBD19844B60002BBC50 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		308A9EC019844BAA002BBC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		3EE64CEC02D345349586E792 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8DB6B02B2DC5489086E7656C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,8 +155,10 @@
 			isa = PBXGroup;
 			children = (
 				1A791DB618442884000943E4 /* PunchClock */,
+				1AB708FA199E7EB400544362 /* BuildConfigs */,
 				1A791DAF18442884000943E4 /* Frameworks */,
 				1A791DAE18442884000943E4 /* Products */,
+				4A49C6F244CD1FA9A2B0FD63 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				1A507A7118564A3200138C44 /* AddressBook.framework */,
-				1AF7D57C18501141006B1FA4 /* HockeySDK.embeddedframework */,
 				1AF7D5881850119F006B1FA4 /* SystemConfiguration.framework */,
 				1AF7D58618501195006B1FA4 /* Security.framework */,
 				1AF7D58418501169006B1FA4 /* CoreText.framework */,
@@ -201,9 +207,6 @@
 			children = (
 				308A9EBC19844B60002BBC50 /* Localizable.strings */,
 				308A9EBF19844BAA002BBC50 /* Localizable.stringsdict */,
-				1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */,
-				1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */,
-				8DB6B02B2DC5489086E7656C /* Pods.xcconfig */,
 				1A30A7EA18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.h */,
 				1A30A7EB18FDE76D002FB8E9 /* PCFileFunctionLevelFormatter.m */,
 				1A4CF3B918E3812E0086BCC0 /* UIView-Borders */,
@@ -215,8 +218,39 @@
 				1A88E3531868FAA80084EF92 /* Podfile */,
 				1A8439A518FC640A00F3AC85 /* status.caf */,
 				1A8439A618FC640A00F3AC85 /* message.caf */,
+				1A032CEF1A1AA68200633D97 /* Launch Screen.xib */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AB708EE199E7EAF00544362 /* BuildConfigs */ = {
+			isa = PBXGroup;
+			children = (
+				1AB708EF199E7EAF00544362 /* Global.xcconfig */,
+				1AB708F0199E7EAF00544362 /* iOS */,
+			);
+			path = BuildConfigs;
+			sourceTree = "<group>";
+		};
+		1AB708F0199E7EAF00544362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1AB708F1199E7EAF00544362 /* iOS_Beta.xcconfig */,
+				1AB708F2199E7EAF00544362 /* iOS_Debug.xcconfig */,
+				1AB708F3199E7EAF00544362 /* iOS_Global.xcconfig */,
+				1AB708F4199E7EAF00544362 /* iOS_Release.xcconfig */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		1AB708FA199E7EB400544362 /* BuildConfigs */ = {
+			isa = PBXGroup;
+			children = (
+				1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */,
+				1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */,
+				1AB708EE199E7EAF00544362 /* BuildConfigs */,
+			);
+			name = BuildConfigs;
 			sourceTree = "<group>";
 		};
 		1AE7EEBE197F0714003F577B /* Information */ = {
@@ -256,23 +290,13 @@
 			name = Messages;
 			sourceTree = "<group>";
 		};
-		1AF7D57C18501141006B1FA4 /* HockeySDK.embeddedframework */ = {
+		4A49C6F244CD1FA9A2B0FD63 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1AF7D57D18501141006B1FA4 /* HockeySDK.framework */,
-				1AF7D57E18501141006B1FA4 /* Resources */,
+				0B80FF4B46B02D053612EDEF /* Pods.debug.xcconfig */,
+				09F295D1F09C9A231E43156E /* Pods.beta.xcconfig */,
 			);
-			name = HockeySDK.embeddedframework;
-			path = "panicQA/HockeySDK-iOS-3/HockeySDK.embeddedframework";
-			sourceTree = "<group>";
-		};
-		1AF7D57E18501141006B1FA4 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				1AF7D57F18501141006B1FA4 /* HockeySDK.xcconfig */,
-				1AF7D58018501141006B1FA4 /* HockeySDKResources.bundle */,
-			);
-			path = Resources;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +312,7 @@
 				1A791DAB18442884000943E4 /* Resources */,
 				289EE16EF5204CA0A35EA707 /* Copy Pods Resources */,
 				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
+				1AB708FD199E9E6900544362 /* Faux Pas */,
 			);
 			buildRules = (
 			);
@@ -349,6 +374,7 @@
 				1A8439A718FC640A00F3AC85 /* status.caf in Resources */,
 				1A791DBB18442884000943E4 /* InfoPlist.strings in Resources */,
 				308A9EC119844BAA002BBC50 /* Localizable.stringsdict in Resources */,
+				1A032CF01A1AA68200633D97 /* Launch Screen.xib in Resources */,
 				1A791DC418442884000943E4 /* Main.storyboard in Resources */,
 				1A8439A818FC640A00F3AC85 /* message.caf in Resources */,
 			);
@@ -357,6 +383,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1AB708FD199E9E6900544362 /* Faux Pas */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Faux Pas";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "exit 0\nif [[ -z ${SKIP_FAUXPAS} || ${SKIP_FAUXPAS} != 1 ]]; then\nif [[ -f /usr/local/bin/fauxpas ]]; then\n/usr/local/bin/fauxpas check-xcode\nelse\necho \"warning: You have to install and set up Faux Pas to use its features!\"\nfi\nfi";
+		};
 		289EE16EF5204CA0A35EA707 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,7 +409,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFA829E456724A469B8FF6BC /* Check Pods Manifest.lock */ = {
@@ -384,7 +424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "if [[ -n $JOB_NAME ]]; then\n  echo \"Skipping Podfile.lock check\"\n  exit 0\nfi\n\ndiff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nwarning: The sandbox is not in sync with the Podfile.lock. Update your Pods with 'pod install --no-integrate'\nEOM\nexit 0\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
@@ -467,117 +507,37 @@
 /* Begin XCBuildConfiguration section */
 		1A791DDD18442884000943E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_STATIC_ANALYZER_MODE = deep;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 59;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
-				PROVISIONING_PROFILE = "57BA53C0-3E6C-4344-BC97-B8E2A32295AF";
-				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos;
-				VERSIONING_SYSTEM = "apple-generic";
-				WARNING_CFLAGS = "-Wunreachable-code";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SDKROOT = iphoneos8.0;
 			};
 			name = Debug;
 		};
 		1A791DDE18442884000943E4 /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_STATIC_ANALYZER_MODE = deep;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Panic Inc.";
-				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 59;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				OTHER_CFLAGS = "";
-				PROVISIONING_PROFILE = "F83B62EA-E0CA-4DA1-8961-5AE21D2B6173";
-				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				WARNING_CFLAGS = "-Wunreachable-code";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SDKROOT = iphoneos8.0;
 			};
 			name = Beta;
 		};
 		1A791DE018442884000943E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AB7870818FEDFDA000DDB61 /* PunchClock_Debug.xcconfig */;
+			baseConfigurationReference = 0B80FF4B46B02D053612EDEF /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PunchClock/PunchClock-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"CONFIGURATION_$(CONFIGURATION)",
-					"DEBUG=1",
-				);
 				INFOPLIST_FILE = "PunchClock/PunchClock-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -585,90 +545,17 @@
 		};
 		1A791DE118442884000943E4 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */;
+			baseConfigurationReference = 09F295D1F09C9A231E43156E /* Pods.beta.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PunchClock/PunchClock-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"CONFIGURATION_$(CONFIGURATION)",
-				);
 				INFOPLIST_FILE = "PunchClock/PunchClock-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Beta;
-		};
-		1A9AB666195CE7EA0079AFC4 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_STATIC_ANALYZER_MODE = deep;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Panic Inc.";
-				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 59;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				OTHER_CFLAGS = "";
-				PROVISIONING_PROFILE = "F83B62EA-E0CA-4DA1-8961-5AE21D2B6173";
-				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				WARNING_CFLAGS = "-Wunreachable-code";
-			};
-			name = Distribution;
-		};
-		1A9AB667195CE7EA0079AFC4 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AB7870918FEE131000DDB61 /* PunchClock_Beta.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PunchClock/PunchClock-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"CONFIGURATION_$(CONFIGURATION)",
-				);
-				INFOPLIST_FILE = "PunchClock/PunchClock-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Distribution;
 		};
 /* End XCBuildConfiguration section */
 
@@ -678,7 +565,6 @@
 			buildConfigurations = (
 				1A791DDD18442884000943E4 /* Debug */,
 				1A791DDE18442884000943E4 /* Beta */,
-				1A9AB666195CE7EA0079AFC4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Beta;
@@ -688,7 +574,6 @@
 			buildConfigurations = (
 				1A791DE018442884000943E4 /* Debug */,
 				1A791DE118442884000943E4 /* Beta */,
-				1A9AB667195CE7EA0079AFC4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Beta;

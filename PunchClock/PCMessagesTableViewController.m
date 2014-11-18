@@ -26,6 +26,8 @@ static NSString *cellIdentifier = @"MessageTableCell";
 	[super viewDidLoad];
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
+	self.tableView.estimatedRowHeight = 68.0f;
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
 
 	[self refreshData:self];
 }
@@ -97,7 +99,7 @@ static NSString *cellIdentifier = @"MessageTableCell";
 							  }];
 
 	cell.nameLabel.text = [username capitalizedString];
-	cell.messageTextView.text = message[@"message"];
+	cell.messageLabel.text = message[@"message"];
 	cell.dateLabel.text = [self formattedStringFromISO8601String:message[@"date"]];
 
 	return cell;
