@@ -7,3 +7,7 @@
 //
 
 CODE_SIGN_IDENTITY = iPhone Developer: 
+//:configuration = Debug
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 CONFIGURATION_$(CONFIGURATION) $(inherited)
+
+//:completeSettings = none
