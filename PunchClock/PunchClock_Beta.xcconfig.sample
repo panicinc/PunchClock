@@ -6,7 +6,4 @@
 //  Copyright (c) 2014 Panic Inc. All rights reserved.
 //
 
-#include "../Pods/Pods.xcconfig"
-
 CODE_SIGN_IDENTITY = iPhone Distribution: 
-PROVISIONING_PROFILE = F83B62EA-E0CA-4DA1-8961-5AE21D2B6173
