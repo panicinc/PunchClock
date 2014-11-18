@@ -100,12 +100,11 @@
 
 - (BOOL)canTrackLocation
 {
-
-#if TARGET_IPHONE_SIMULATOR
-//	return YES;
-#endif
-
 	NSString *errorMsg;
+
+	if (!_locationManager) {
+		_locationManager = [CLLocationManager new];
+	}
 
 	if (![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
 		DDLogError(@"Beacon Tracking Unavailable");
@@ -121,14 +120,22 @@
 
 		} else {
 
-			if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
-					[CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
+			CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+
+			if ( status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted) {
 				
-				errorMsg = NSLocalizedString(@"Location Tracking Unavailable", nil);
+				errorMsg = NSLocalizedString(@"Location Tracking Unavailable. Please allow access in Settings->Privacy->Location Services->PunchClock", nil);
+
+			} else if ( [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined ) {
+
+				[self.locationManager requestAlwaysAuthorization];
+				DDLogDebug(@"Requesting Authorization");
+
 			} else {
 				
 				// We have the services we need to get started
-				
+				DDLogVerbose(@"We can track locations");
+
 				return YES;
 			}
 		}
@@ -154,12 +161,14 @@
 		return;
 	}
 
+	DDLogDebug(@"Setting up location manager");
+
+
 	self.lastExitDate = [NSDate dateWithTimeIntervalSince1970:0];
 	self.lastEntryDate = [NSDate dateWithTimeIntervalSince1970:0];
 	self.lastNotificationDate = [NSDate dateWithTimeIntervalSince1970:0];
 	_bluetoothEnabled = YES;
 
-	_locationManager = [CLLocationManager new];
 	_locationManager.delegate = self;
 	_locationManager.distanceFilter = kCLLocationAccuracyBest;
 	_locationManager.activityType = CLActivityTypeAutomotiveNavigation;
@@ -274,6 +283,7 @@
 {
 
 	if (!self.setupCompleted) {
+		[self setupManager];
 		return;
 	}
 
@@ -364,10 +374,14 @@
 
 - (void)stopRanging
 {
-	DDLogInfo(@"Stop Ranging");
-	[self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
-	self.isRanging = NO;
-	self.closestBeacon = nil;
+	CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+
+	if ( status != kCLAuthorizationStatusNotDetermined ) {
+		DDLogInfo(@"Stop Ranging");
+		[self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
+		self.isRanging = NO;
+		self.closestBeacon = nil;
+	}
 }
 
 - (void)setInRange:(BOOL)inRange
@@ -406,6 +420,15 @@
 + (BOOL)automaticallyNotifiesObserversOfInRange
 {
 	return NO;
+}
+
+- (void)setClosestBeacon:(CLBeacon *)beacon
+{
+	if (_closestBeacon.minor != beacon.minor || _closestBeacon.proximity != beacon.proximity) {
+		[self updateLocationStatusOnTimer];
+	}
+
+	_closestBeacon = beacon;
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -457,7 +480,7 @@
 
 		if (beacon.accuracy < closestSignal && beacon.accuracy > 0) {
 			closestSignal = beacon.accuracy;
-			self.closestBeacon = beacon;
+			closestBeacon = beacon;
 		}
 
 	}
@@ -527,6 +550,8 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
 	self.trackLocationNotified = NO;
+	self.setupCompleted = NO;
+
 	[self setupManager];
 }
 
@@ -566,6 +591,16 @@
 
 	}
 
+}
+
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager
+{
+	DDLogDebug(@"Pausing updates");
+}
+
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager
+{
+	DDLogDebug(@"Resuming Updates");
 }
 
 @end
