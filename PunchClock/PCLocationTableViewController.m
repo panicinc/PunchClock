@@ -91,8 +91,11 @@
 			}
 		} else if ([keyPath isEqualToString:@"location"]) {
 			CLLocation *newLocation = (CLLocation *)change[NSKeyValueChangeNewKey];
-			self.latitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
-			self.longitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
+
+			if (![newLocation isEqual:[NSNull null]]) {
+				self.latitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
+				self.longitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
+			}
 		}
 
 	} else if (object == [NSUserDefaults standardUserDefaults]) {
