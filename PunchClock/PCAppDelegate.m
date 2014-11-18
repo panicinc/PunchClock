@@ -252,12 +252,12 @@
 	[ZeroPush engageWithAPIKey:zeroPushProdKey delegate:self];
 #endif
 
-    [[ZeroPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |
-                                                           UIRemoteNotificationTypeBadge |
-                                                           UIRemoteNotificationTypeSound)];
+    [[ZeroPush shared] registerForRemoteNotificationTypes:(UIUserNotificationTypeAlert |
+                                                           UIUserNotificationTypeBadge |
+                                                           UIUserNotificationTypeSound)];
 
 
-	if ([application enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
+	if (![application isRegisteredForRemoteNotifications]) {
 		DDLogError(@"Notifications disabled");
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		[defaults setObject:@"" forKey:@"push_id"];
