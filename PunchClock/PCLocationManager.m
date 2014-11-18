@@ -122,8 +122,6 @@
 
 		} else {
 
-			CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-
 			if ( status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
 				
 				errorMsg = NSLocalizedString(@"To use background location you must turn on 'Always' in the Location Services Settings", @"To use background location you must turn on 'Always' in the Location Services Settings");

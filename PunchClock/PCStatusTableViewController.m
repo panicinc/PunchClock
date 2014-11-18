@@ -204,7 +204,7 @@
 																	 style:UIAlertActionStyleDefault
 																	 handler:^(UIAlertAction *action)
 																	 {
-																		 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];
+																		 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 																	 }];
 
 	[alertController addAction:settingsAction];
