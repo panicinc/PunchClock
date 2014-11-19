@@ -82,12 +82,12 @@
 		} else if ([keyPath isEqualToString:@"closestBeacon"]) {
 			CLBeacon *newValue = (CLBeacon *)[change objectForKey:NSKeyValueChangeNewKey];
 
-			if (![newValue isEqual:[NSNull null]]) {
+			if (newValue.major) {
 				self.closestBeaconLabel.text = [NSString stringWithFormat:@"%@/%@", newValue.major, newValue.minor];
 				self.beaconSignalStrengthLabel.text = [NSString stringWithFormat:@"%li", (long)newValue.rssi];
 			} else {
-				self.closestBeaconLabel.text = @"?";
-				self.beaconSignalStrengthLabel.text = @"?";
+				self.closestBeaconLabel.text = @"Unknown";
+				self.beaconSignalStrengthLabel.text = @"Unknown";
 			}
 		} else if ([keyPath isEqualToString:@"location"]) {
 			CLLocation *newLocation = (CLLocation *)[change objectForKey:NSKeyValueChangeNewKey];
@@ -96,8 +96,8 @@
                 self.latitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
                 self.longitudeLabel.text = [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
             } else {
-                self.latitudeLabel.text = @"?";
-                self.longitudeLabel.text = @"?";
+                self.latitudeLabel.text = @"Unknown";
+                self.longitudeLabel.text = @"Unknown";
             }
 		}
 

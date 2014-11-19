@@ -69,8 +69,8 @@
 		_inRange =  NO;
 		_trackLocationNotified = NO;
 		_setupCompleted = NO;
-		_beaconDistance = @"?";
-		_officeDistance = @"?";
+		_beaconDistance = @"Unknown";
+		_officeDistance = @"Unknown";
 		_officeDistanceValue = 1000;
 		_geoFenceEnabled = NO;
 		_closestBeacon = [[CLBeacon alloc] init];
@@ -493,7 +493,7 @@
 	self.closestBeacon = closestBeacon;
 
 	if (self.closestBeacon.proximity == CLProximityUnknown) {
-		self.beaconDistance = @"?";
+		self.beaconDistance = @"Unknown";
 	} else if (self.closestBeacon.proximity == CLProximityImmediate) {
 		self.beaconDistance = NSLocalizedString(@"Immediate", nil);
 	} else if (self.closestBeacon.proximity == CLProximityNear) {

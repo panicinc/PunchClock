@@ -146,6 +146,7 @@ static NSString *cellIdentifier = @"StatusTableCell";
 		UIButton *bell = (UIButton *)[cell viewWithTag:4];
 		NSNumber *watched_by_value = (NSNumber *)person[@"watched_by_requestor"];
 		bell.selected = [watched_by_value boolValue];
+		bell.accessibilityLabel = bell.selected ? [NSString stringWithFormat:@"Stop watching %@", username] : [NSString stringWithFormat:@"Watch %@", username];
 
 		if ([push_id isEqualToString:@""]) {
 			bell.hidden = YES;
@@ -153,7 +154,10 @@ static NSString *cellIdentifier = @"StatusTableCell";
 
 		UIButton *eye = (UIButton *)[cell viewWithTag:5];
 		NSNumber *watches_value = (NSNumber *)person[@"watches_requestor"];
-		eye.hidden = ![watches_value boolValue];
+
+		eye.selected = [watches_value boolValue];
+		eye.hidden = !eye.selected;
+		eye.accessibilityLabel = eye.selected ? [NSString stringWithFormat:@"Watched by %@", username] : @"";
 
 
 	}

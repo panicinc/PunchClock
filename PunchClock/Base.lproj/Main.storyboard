@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HjO-G5-yxc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HjO-G5-yxc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -645,6 +645,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swj-nH-qDn">
                                         <rect key="frame" x="12" y="27" width="32" height="23"/>
+                                        <accessibility key="accessibilityConfiguration" label="Compose Message"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="XfU-8o-7X8"/>
                                             <constraint firstAttribute="height" constant="23" id="qIP-Kd-8rl"/>
@@ -700,15 +701,11 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye" translatesAutoresizingMaskIntoConstraints="NO" id="cxZ-fM-3LD">
-                                                    <rect key="frame" x="437" y="15" width="24" height="13"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="13" id="DYX-xU-myJ"/>
-                                                        <constraint firstAttribute="width" constant="24" id="MDB-78-t14"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <button opaque="NO" tag="4" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JE0-Bd-MyO" userLabel="bell">
                                                     <rect key="frame" x="469" y="1" width="43" height="42"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Watch">
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="5oZ-c3-RQo"/>
                                                         <constraint firstAttribute="width" constant="43" id="RlI-kS-TcE"/>
@@ -730,20 +727,30 @@
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="-1" height="-1"/>
                                                 </label>
+                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mv-gE-Tie">
+                                                    <rect key="frame" x="431" y="5" width="30" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="aVP-hM-cE2"/>
+                                                        <constraint firstAttribute="height" constant="34" id="jmz-kj-ZKC"/>
+                                                    </constraints>
+                                                    <state key="normal" image="eye">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="eye"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.270588249" green="0.18823531269999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="JE0-Bd-MyO" secondAttribute="centerY" id="2to-mK-990"/>
                                                 <constraint firstItem="R8c-oc-ap5" firstAttribute="leading" secondItem="d17-Rn-eoR" secondAttribute="trailing" constant="8" id="3oa-n0-CDY"/>
                                                 <constraint firstItem="d17-Rn-eoR" firstAttribute="leading" secondItem="D6J-xp-dkP" secondAttribute="leading" constant="12" id="Ewb-er-Vjh"/>
-                                                <constraint firstAttribute="centerY" secondItem="cxZ-fM-3LD" secondAttribute="centerY" id="FwR-pG-Jf6"/>
-                                                <constraint firstItem="JE0-Bd-MyO" firstAttribute="leading" secondItem="cxZ-fM-3LD" secondAttribute="trailing" constant="8" id="JIN-DN-8io"/>
                                                 <constraint firstAttribute="centerY" secondItem="La6-gx-akJ" secondAttribute="centerY" id="Rar-fi-mRd"/>
-                                                <constraint firstItem="JE0-Bd-MyO" firstAttribute="leading" secondItem="cxZ-fM-3LD" secondAttribute="trailing" constant="8" id="ZZz-kx-qdF"/>
+                                                <constraint firstItem="JE0-Bd-MyO" firstAttribute="leading" secondItem="6mv-gE-Tie" secondAttribute="trailing" constant="8" id="RjE-vd-UK9"/>
                                                 <constraint firstAttribute="centerY" secondItem="R8c-oc-ap5" secondAttribute="centerY" id="clx-Rk-TgM"/>
                                                 <constraint firstAttribute="centerY" secondItem="d17-Rn-eoR" secondAttribute="centerY" id="jrl-Zb-u6g"/>
                                                 <constraint firstItem="La6-gx-akJ" firstAttribute="leading" secondItem="JE0-Bd-MyO" secondAttribute="trailing" constant="8" id="lkR-50-o3F"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="La6-gx-akJ" secondAttribute="trailing" constant="12" id="pfV-2H-n5Z"/>
+                                                <constraint firstAttribute="centerY" secondItem="6mv-gE-Tie" secondAttribute="centerY" id="s2d-ed-Wd7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.10588236149999999" green="0.050980396570000003" blue="0.0078431377190000002" alpha="1" colorSpace="deviceRGB"/>
@@ -925,6 +932,6 @@
         <image name="unknown" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="T4s-PK-4NR"/>
+        <segue reference="8Js-GT-8ub"/>
     </inferredMetricsTieBreakers>
 </document>
