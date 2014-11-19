@@ -82,6 +82,10 @@
 		} else if ([keyPath isEqualToString:@"closestBeacon"]) {
 			CLBeacon *newValue = (CLBeacon *)[change objectForKey:NSKeyValueChangeNewKey];
 
+			if ([newValue isEqual:[NSNull null]]) {
+				return;
+			}
+
 			if (newValue.major) {
 				self.closestBeaconLabel.text = [NSString stringWithFormat:@"%@/%@", newValue.major, newValue.minor];
 				self.beaconSignalStrengthLabel.text = [NSString stringWithFormat:@"%li", (long)newValue.rssi];
