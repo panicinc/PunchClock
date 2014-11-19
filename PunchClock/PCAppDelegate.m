@@ -20,18 +20,18 @@
 	[DDLog addLogger:[DDASLLogger sharedInstance]];
 
 	[[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.714f green:0.729f blue:0.714f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_DEBUG];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.624f green:0.635f blue:0.337f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_INFO];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.839f green:0.631f blue:0.298f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_WARN];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.925f green:0.000f blue:0.000f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_ERROR];
+	[[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.714f green:0.729f blue:0.714f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_DEBUG];
+	[[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.624f green:0.635f blue:0.337f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_INFO];
+	[[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.839f green:0.631f blue:0.298f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_WARN];
+	[[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithRed:0.925f green:0.000f blue:0.000f alpha:1.000] backgroundColor:nil forFlag:LOG_FLAG_ERROR];
 
 	PCFileFunctionLevelFormatter *formatter = [PCFileFunctionLevelFormatter new];
 	[[DDTTYLogger sharedInstance] setLogFormatter:formatter];
 
 	// Hockey
 	[[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:hockeyBetaIdentifier
-														 liveIdentifier:@"00000000000000000000000000000000"
-															   delegate:self];
+																											 liveIdentifier:@"00000000000000000000000000000000"
+																														 delegate:self];
 
 	[BITHockeyManager sharedHockeyManager].crashManager.showAlwaysButton = YES;
 
@@ -114,7 +114,7 @@
 	}
 
 	[defaults synchronize];
-	
+
 }
 
 #pragma mark - background fetch
@@ -135,7 +135,7 @@
 	dispatch_group_notify(self.locationManager.dispatchGroup, dispatch_get_main_queue(), ^{
 		DDLogDebug(@"Background stuff finished. Result is %ld", (long) result);
 		completionHandler(result);
-    });
+	});
 
 }
 
@@ -143,12 +143,12 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)tokenData
 {
-    [[ZeroPush shared] registerDeviceToken:tokenData];
-    NSString *tokenString = [ZeroPush deviceTokenFromData:tokenData];
+	[[ZeroPush shared] registerDeviceToken:tokenData];
+	NSString *tokenString = [ZeroPush deviceTokenFromData:tokenData];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:tokenString forKey:@"push_id"];
 
-    DDLogDebug(@"Push Token is %@", tokenString);
+	DDLogDebug(@"Push Token is %@", tokenString);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -156,17 +156,17 @@
 	DDLogDebug(@"Push notification: %@", userInfo);
 
 	//if the notification doesn't say there is content available just return
-    NSDictionary *aps = userInfo[@"aps"];
+	NSDictionary *aps = userInfo[@"aps"];
 
-    if (![aps[@"content-available"] intValue]) {
-        DDLogDebug(@"Updating Status List");
+	if (![aps[@"content-available"] intValue]) {
+		DDLogDebug(@"Updating Status List");
 
 		NSNotification *n = [NSNotification notificationWithName:@"StatusUpdated" object:nil];
 		[[NSNotificationCenter defaultCenter] postNotification:n];
 
-        completionHandler(UIBackgroundFetchResultNoData);
-        return;
-    } else {
+		completionHandler(UIBackgroundFetchResultNoData);
+		return;
+	} else {
 
 		dispatch_group_enter(self.locationManager.dispatchGroup);
 
@@ -199,10 +199,10 @@
 {
 	// If the application is in the foreground, we will notify the user of the region's state via an alert.
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertBody
-													message:nil
-												   delegate:nil
-										  cancelButtonTitle:NSLocalizedString(@"OK", @"")
-										  otherButtonTitles:nil];
+																									message:nil
+																								 delegate:nil
+																				cancelButtonTitle:NSLocalizedString(@"OK", @"")
+																				otherButtonTitles:nil];
 	[alert show];
 
 }
@@ -228,7 +228,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 	DDLogVerbose(@"<---");
 }
@@ -252,16 +252,15 @@
 	[ZeroPush engageWithAPIKey:zeroPushProdKey delegate:self];
 #endif
 
-    [[ZeroPush shared] registerForRemoteNotificationTypes:(UIUserNotificationTypeAlert |
-                                                           UIUserNotificationTypeBadge |
-                                                           UIUserNotificationTypeSound)];
+	//now ask the user if they want to recieve push notifications. You can place this in another part of your app.
+	[[ZeroPush shared] registerForRemoteNotifications];
 
 
-	if (![application isRegisteredForRemoteNotifications]) {
-		DDLogError(@"Notifications disabled");
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setObject:@"" forKey:@"push_id"];
-	}
+//	if (![application isRegisteredForRemoteNotifications]) {
+//		DDLogError(@"Notifications disabled");
+//		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//		[defaults setObject:@"" forKey:@"push_id"];
+//	}
 
 	DDLogVerbose(@"<---");
 }
