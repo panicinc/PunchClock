@@ -8,10 +8,9 @@
 
 @import UIKit;
 #import "PCLocationManager.h"
-#import <HockeySDK/HockeySDK.h>
 #import <ZeroPush/ZeroPush.h>
 
-@interface PCAppDelegate : UIResponder <UIApplicationDelegate, BITHockeyManagerDelegate, ZeroPushDelegate>
+@interface PCAppDelegate : UIResponder <UIApplicationDelegate, ZeroPushDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) PCLocationManager *locationManager;
