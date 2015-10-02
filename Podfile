@@ -3,7 +3,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 
 pod 'AFNetworking', '~> 2.0'
-pod 'HockeySDK'
 pod 'KeychainItemWrapper', '~> 1.2'
 pod 'ZeroPush', '~> 2.0'
 pod 'MZFormSheetController', '~> 2.3'

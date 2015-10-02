@@ -7,7 +7,6 @@
 //
 
 #import "PCAppDelegate.h"
-#import <HockeySDK/HockeySDK.h>
 #import <KeychainItemWrapper/KeychainItemWrapper.h>
 #import <ZeroPush/ZeroPush.h>
 
@@ -27,27 +26,6 @@
 
 	PCFileFunctionLevelFormatter *formatter = [PCFileFunctionLevelFormatter new];
 	[[DDTTYLogger sharedInstance] setLogFormatter:formatter];
-
-	// Hockey
-	[[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:hockeyBetaIdentifier
-																											 liveIdentifier:@"00000000000000000000000000000000"
-																														 delegate:self];
-
-	[BITHockeyManager sharedHockeyManager].crashManager.showAlwaysButton = YES;
-
-#ifdef CONFIGURATION_Debug
-	[BITHockeyManager sharedHockeyManager].disableCrashManager = YES;
-	[BITHockeyManager sharedHockeyManager].disableUpdateManager = YES;
-#else
-	[[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:hockeyAuthenticationSecret];
-	[[BITHockeyManager sharedHockeyManager].authenticator setIdentificationType:BITAuthenticatorIdentificationTypeHockeyAppEmail];
-#endif
-
-	[[BITHockeyManager sharedHockeyManager] startManager];
-
-#ifdef CONFIGURATION_Beta
-	[[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-#endif
 
 	// Default Settings
 	NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:1];
