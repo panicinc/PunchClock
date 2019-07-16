@@ -30,10 +30,10 @@ The Information tab simply shows you the data that Core Location is returning. I
 Contributing
 ------------
 
-Feel free to fork and send us pull requests
+**PunchClock is no longer being updated**
 
 Bug Reporting
 -------------
 
-**PunchClock is an unsupported, unofficial Panic product.** If you can't contribute directly, please file bugs here.
+**PunchClock is an unsupported, unofficial Panic product.** 
 
